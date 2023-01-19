@@ -22,7 +22,7 @@ export const validateRegisterInput = (data) => {
     errors.password = 'Password field is required';
   }
 
-  if (validator.isLength(data.password, { min: 6, max: 30 })) {
+  if (!validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = 'Password field must be at least 6 characters';
   }
 
