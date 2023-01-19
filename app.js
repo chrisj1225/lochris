@@ -1,11 +1,13 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const db = require('./config/keys').mongoURI;
-const bodyParser = require('body-parser');
-const passport = require('passport');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import passport from 'passport';
 
-const users = require('./routes/api/users');
+import keys from './config/keys';
+import users from './routes/api/users';
+
+const app = express();
+const db = keys.mongoURI;
 
 mongoose
   .connect(db, { useNewUrlParser: true })
