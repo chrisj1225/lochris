@@ -1,11 +1,14 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const passport = require('passport');
-const keys = require('../../config/keys');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import passport from 'passport';
+import keys from '../../config/keys';
+
+import User from '../../models/User';
+import validateRegisterInput from '../../validation/register';
+import validateLoginInput from '../../validation/login';
 
 const router = express.Router();
-const User = require('../../models/User');
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route"}));
 

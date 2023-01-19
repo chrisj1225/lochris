@@ -24,7 +24,7 @@ const UserSchema = new Schema({
   },
   isValidated: {
     type: Boolean,
-    required: true,
+    required: false,
   }
 }, {
   timestamps: true,
