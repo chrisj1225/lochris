@@ -1,7 +1,7 @@
 import validator from 'validator';
-import validText from './valid-text';
+import { validText } from './valid-text.js';
 
-const validateRegisterInput = (data) => {
+export const validateRegisterInput = (data) => {
   let errors = {};
 
   data.email = validText(data.email) ? data.email : '';
@@ -39,5 +39,3 @@ const validateRegisterInput = (data) => {
     isValid: Object.keys(errors).length === 0,
   };
 };
-
-module.exports = validateRegisterInput;

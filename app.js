@@ -3,8 +3,9 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 
-import keys from './config/keys';
-import users from './routes/api/users';
+import { keys } from './config/keys.js';
+import users from './routes/api/users.js';
+import { passportFunc } from './config/passport.js';
 
 const app = express();
 const db = keys.mongoURI;
@@ -14,11 +15,13 @@ mongoose
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
 
+app.use("/", (req, res) => res.send('hello world >:)'))
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
-require('./config/passport')(passport);
+passportFunc(passport);
 app.use("/api/users", users);
   
 const port = process.env.PORT || 3000;

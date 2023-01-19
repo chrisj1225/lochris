@@ -2,11 +2,11 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
-import keys from '../../config/keys';
 
-import User from '../../models/User';
-import validateRegisterInput from '../../validation/register';
-import validateLoginInput from '../../validation/login';
+import { keys } from '../../config/keys.js';
+import User from '../../models/User.js';
+import { validateRegisterInput } from '../../validation/register.js';
+import { validateLoginInput } from '../../validation/login.js';
 
 const router = express.Router();
 
@@ -129,4 +129,4 @@ router.post('/login', (req, res) => {
     })
 })
 
-module.exports = router;
+export default router;
