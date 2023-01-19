@@ -16,8 +16,9 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route"}));
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
   res.json({
     id: req.user.id,
-    handle: req.user.handle,
-    email: req.user,
+    email: req.user.email,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
   });
 })
 
@@ -32,7 +33,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email})
     .then(user => {
       if (user) {
-        errors.handle = "User already exists";
+        errors.email = "User already exists";
         return res.status(400).json(errors);
       } else {
         // Create a new user
