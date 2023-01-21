@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { useSelector } from 'react-redux';
+import useSessions from '../hooks/useSessions.hooks';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 
 const Auth = ({ component: Component, path, exact }) => {
-  const { isAuthenticated } = useSelector((state) => state.sessionState);
+  const { isAuthenticated } = useSessions();
 
   return (
     <Route path={path} exact={exact} render={(props) => (
@@ -17,7 +17,7 @@ const Auth = ({ component: Component, path, exact }) => {
 }
 
 const Protected = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = useSelector((state) => state.sessionState);
+  const { isAuthenticated } = useSessions();
 
   return (
     <Route
