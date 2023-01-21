@@ -13,11 +13,11 @@ const Landing = () => {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: gray;
+  background: lightgray;
 `;
 
 const Title = styled.h1`
-  color: lightblue;
+  color: navy;
   margin: 0;
 `;
 
