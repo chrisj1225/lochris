@@ -2,7 +2,7 @@ import {
   RECEIVE_CURRENT_USER,
   RECEIVE_USER_LOGIN,
   RECEIVE_USER_LOGOUT,
-} from '../actions/session_actions';
+} from '../../actions/session_actions';
 
 const initialState = {
   isAuthenticated: false,
