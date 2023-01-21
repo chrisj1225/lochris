@@ -8,9 +8,9 @@ import SignupView from './organisms/SignupView';
 
 const App = () => (
     <Switch>
-        <AuthRoute exact path="/" component={Landing} />
         <AuthRoute exact path="/login" component={LoginView} />
         <AuthRoute exact path="/signup" component={SignupView} />
+        <ProtectedRoute exact path="/" component={Landing} />
     </Switch>
 );
 
