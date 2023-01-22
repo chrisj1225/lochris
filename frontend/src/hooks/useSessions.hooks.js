@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../actions/session_actions';
+import { login, logout } from '../actions/session_actions';
 
 const useSessions = () => {
   const dispatch = useDispatch();
@@ -14,11 +14,16 @@ const useSessions = () => {
     dispatch(login(user));
   }
 
+  const logoutUser = () => {
+    dispatch(logout());
+  }
+
   return {
     isAuthenticated,
     user,
     isLoggedIn,
     loginUser,
+    logoutUser,
   }
 };
 
