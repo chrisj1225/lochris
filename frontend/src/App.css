@@ -2,3 +2,8 @@
   min-height: 100vh;
   /* background: #fefefe; */
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
