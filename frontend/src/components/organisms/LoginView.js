@@ -34,15 +34,8 @@ const LoginView = () => {
     loginUser(user);
   }
 
-  const renderErrors = () => {
-    <ul>
-      {Object.keys(errors).map((errKey, i) => (
-        <li key={i}>
-          {errors[errKey]}
-        </li>
-      ))}
-    </ul>
-  }
+  const emailError = errors['email'];
+  const passwordError = errors['password'];
 
   return (
     <LoginWrapper>
@@ -54,15 +47,17 @@ const LoginView = () => {
             onChange={updateField('email')}
             placeholder="Email"
           />
+          <ErrorMsg>{emailError}</ErrorMsg>
           <TextInput type="password"
             value={state.password}
             onChange={updateField('password')}
             placeholder="password"
           />
+          <ErrorMsg>{passwordError}</ErrorMsg>
           <SubmitButton type="submit"
-            value="Login"
-          >Login</SubmitButton>
-          {renderErrors()}
+            value="Login">
+            Login
+          </SubmitButton>
         </FormWrapper>
       </form>
     </LoginWrapper>
@@ -89,6 +84,7 @@ const FormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 200px;
+  gap: 5px;
 `;
 
 const TextInput = styled.input`
@@ -98,7 +94,14 @@ const TextInput = styled.input`
   padding: 10px;
   border: 1px solid black;
   border-radius: 8px;
-  margin-bottom: 5px;
+  // margin-bottom: 5px;
+`;
+
+const ErrorMsg = styled.p`
+  font-size: 12px;
+  font-weight: 500;
+  color: red;
+  margin: 0;
 `;
 
 const SubmitButton = styled.button`
