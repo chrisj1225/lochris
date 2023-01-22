@@ -1,13 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import useSessions from '../../hooks/useSessions.hooks';
 import useSessionErrors from '../../hooks/useSessionErrors.hooks';
 
 const LoginView = () => {
   const {
-    isAuthenticated,
-    user,
-    isLoggedIn,
     loginUser,
   } = useSessions();
   const { errors } = useSessionErrors();
@@ -47,27 +45,69 @@ const LoginView = () => {
   }
 
   return (
-    <div>
+    <LoginWrapper>
+      <LoginHeader>LOCHRIS</LoginHeader>
       <form onSubmit={handleSubmit}>
-        <div>
-          <input type="text"
+        <FormWrapper>
+          <TextInput type="text"
             value={state.email}
             onChange={updateField('email')}
             placeholder="Email"
           />
-          <input type="password"
+          <TextInput type="password"
             value={state.password}
             onChange={updateField('password')}
             placeholder="password"
           />
-          <input type="submit"
-            value="Submit"
-          />
+          <SubmitButton type="submit"
+            value="Login"
+          >Login</SubmitButton>
           {renderErrors()}
-        </div>
+        </FormWrapper>
       </form>
-    </div>
+    </LoginWrapper>
   )
 }
+
+const LoginHeader = styled.h1`
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+`;
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+`;
+
+const TextInput = styled.input`
+  width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-bottom: 5px;
+`;
+
+const SubmitButton = styled.button`
+  width: 100px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid black;
+  background: white;
+  cursor: pointer; 
+`;
 
 export default LoginView;

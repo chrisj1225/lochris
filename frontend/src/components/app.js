@@ -18,7 +18,7 @@ import {
 } from './organisms';
 
 const App = () => (
-  <div>
+  <>
     <NavBar />
     <Switch>
         <AuthRoute exact path="/login" component={LoginView} />
@@ -31,7 +31,7 @@ const App = () => (
         <ProtectedRoute exact path="/moments" component={MomentsView} />
         <ProtectedRoute exact path="/music" component={MusicView} />
     </Switch>
-  </div>
+  </>
 );
 
 export default App;
