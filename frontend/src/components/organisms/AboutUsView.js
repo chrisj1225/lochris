@@ -9,7 +9,7 @@ const AboutUsView = () => {
     <ContentWrapper>
       <Title>This is the About Us page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default AboutUsView;

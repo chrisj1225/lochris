@@ -9,7 +9,7 @@ const MomentsView = () => {
     <ContentWrapper>
       <Title>This is the Moments page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default MomentsView;

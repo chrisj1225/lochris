@@ -9,7 +9,7 @@ const RegistryView = () => {
     <ContentWrapper>
       <Title>This is the Registry page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default RegistryView;

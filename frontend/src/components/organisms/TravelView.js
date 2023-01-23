@@ -9,7 +9,7 @@ const TravelView = () => {
     <ContentWrapper>
       <Title>This is the Travel page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default TravelView;

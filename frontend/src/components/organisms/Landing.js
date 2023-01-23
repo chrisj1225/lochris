@@ -9,7 +9,7 @@ const Landing = () => {
     <ContentWrapper>
       <Title>This is the landing page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default Landing;

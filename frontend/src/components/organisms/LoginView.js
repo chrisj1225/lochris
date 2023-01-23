@@ -61,8 +61,8 @@ const LoginView = () => {
         </FormWrapper>
       </form>
     </LoginWrapper>
-  )
-}
+  );
+};
 
 const LoginHeader = styled.h1`
   font-size: 24px;

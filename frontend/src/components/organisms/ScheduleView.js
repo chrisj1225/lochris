@@ -9,7 +9,7 @@ const ScheduleView = () => {
     <ContentWrapper>
       <Title>This is the Schedule page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default ScheduleView;

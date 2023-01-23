@@ -9,7 +9,7 @@ const MusicView = () => {
     <ContentWrapper>
       <Title>This is the Music page</Title>
     </ContentWrapper>
-  )
-}
+  );
+};
 
 export default MusicView;
