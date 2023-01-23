@@ -5,7 +5,7 @@ import errors from './errors/errors_reducer';
 
 const RootReducer = combineReducers({
   session: sessionState,
-  rsvp: rsvpState,
+  rsvps: rsvpState,
   errors,
 });
 
