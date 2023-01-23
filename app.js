@@ -5,6 +5,7 @@ import passport from 'passport';
 
 import { keys } from './config/keys.js';
 import users from './routes/api/users.js';
+import rsvps from './routes/api/rsvps.js';
 import { passportFunc } from './config/passport.js';
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 passportFunc(passport);
 app.use("/api/users", users);
+app.use("/api/rsvps", rsvps);
   
 const port = process.env.PORT || 5000;
 
