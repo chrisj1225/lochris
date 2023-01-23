@@ -11,15 +11,23 @@ const UserSchema = new Schema({
     type: Boolean,
     required: true,
   },
-  plusOneAttending: {
-    type: Boolean,
-    required: true,
-  },
   appetizer: {
     type: String,
     required: true,
   },
   mainCourse: {
+    type: String,
+    required: false,
+  },
+  p1Attending: {
+    type: Boolean,
+    required: true,
+  },
+  p1Appetizer: {
+    type: String,
+    required: true,
+  },
+  p1MainCourse: {
     type: String,
     required: false,
   },
