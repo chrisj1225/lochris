@@ -10,7 +10,6 @@ const router = express.Router();
 // fetch all rsvps
 router.get('/', (req, res) => {
   Rsvp.find()
-    .sort({ userId })
     .then(rsvps => res.json(rsvps))
     .catch(err => 
       res.status(404).json({ norsvpsfound: 'No Rsvps found'})
