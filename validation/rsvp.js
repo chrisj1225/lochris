@@ -1,4 +1,4 @@
-import validator from './validator';
+import validator from 'validator';
 
 export const validateRsvp = (data) => {
   let errors = {};
