@@ -34,6 +34,7 @@ router.get('/:id', (req, res) => {
     );
 });
 
+// create an rsvp
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
