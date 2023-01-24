@@ -1,7 +1,6 @@
 import express from 'express';
 import passport from 'passport';
 
-import User from '../../models/User.js';
 import Rsvp from '../../models/Rsvp.js';
 import { validateRsvp } from '../../validation/rsvp.js';
 
@@ -28,8 +27,8 @@ router.get('/:id', async (req, res) => {
 // create an rsvp
 router.post('/',
   passport.authenticate('jwt', { session: false }),
-  async (req, res) => {
-    const { errors, isValid } = validateRsvp(req.body, req.user.plusOne);
+  (req, res) => {
+    const { errors, isValid } = validateRsvp(req.body, req.user?.plusOne);
 
     if (!isValid) {
       return res.status(400).json(errors);
@@ -40,14 +39,15 @@ router.post('/',
       attending: req.body.attending,
     };
 
-    const user = await User.findById(req.user.id);
-    if (user?.plusOne) {
+    if (req.user?.plusOne) {
       rsvpObj.p1Attending = req.body.p1Attending;
     }
 
     const newRsvp = new Rsvp(rsvpObj);
 
-    newRsvp.save().then(rsvp => res.json(rsvp));
+    newRsvp.save()
+      .then(rsvp => res.json(rsvp))
+      .catch(err => res.json(err));
   }
 );
 
