@@ -16,15 +16,53 @@ const Landing = () => {
 
   const [activeModal, setActiveModal] = React.useState(null);
 
+  const [rsvpForm, setRsvpForm] = React.useState({
+    attending: null,
+  });
+
+  const handleCreateRsvp = e => {
+    e.preventDefault();
+    createRsvp(rsvpForm);
+  } 
+
   const modalObj = {
+    createRsvp: (
+      <RsvpFormWrapper>
+        <p>Welcome {user.firstName} {user.lastName}!</p>
+        <p>You have not yet RSVPed</p>
+        <p>Will you be able to join us on XX/XX/2023?</p>
+        <div onChange={(e) => setRsvpForm({
+          ...rsvpForm,
+          attending: e.target.value,
+        })}>
+          <input type="radio" id="y" name="attending" value="y" />
+          <label for="y">Joyfully Accept</label>
+          <input type="radio" id="n" name="attending" value="n" />
+          <label for="n">Regretfully Decline</label>
+        </div>
+        {user.plusOne && <>
+          <p>{`Will ${user.plusOne} be able to join us?`}</p>
+          <div onChange={(e) => setRsvpForm({
+            ...rsvpForm,
+            p1Attending: e.target.value,
+          })}>
+            <input type="radio" id="y" name="p1attending" value="y" />
+            <label for="y">Joyfully Accept</label>
+            <input type="radio" id="n" name="p1attending" value="n" />
+            <label for="n">Regretfully Decline</label>
+          </div>
+        </>}
+        <ActionButton onClick={handleCreateRsvp}>RSVP</ActionButton>
+      </RsvpFormWrapper>
+    ),
     editRsvp: (
       <RsvpFormWrapper>
-        Hello
+        <p>Welcome Back {user.firstName} {user.lastName}!</p>
       </RsvpFormWrapper>
     ),
     viewRsvp: (
       <RsvpWrapper>
-        Here is where the RSVP will be displayed
+        <p>Here is where the RSVP will be displayed</p>
         <button>Edit Rsvp</button>
       </RsvpWrapper>
     )
@@ -38,7 +76,7 @@ const Landing = () => {
     } else {
       if (!Object.keys(currentRsvp).length) {
         return (
-          <RsvpButton onClick={() => setActiveModal('editRsvp')}>
+          <RsvpButton onClick={() => setActiveModal('createRsvp')}>
             RSVP Now
           </RsvpButton>
         );
@@ -52,7 +90,7 @@ const Landing = () => {
     }
   };
 
-  console.log({ user, rsvpFetched, currentRsvp });
+  console.log({ user, rsvpFetched, currentRsvp, rsvpForm });
   return (
     <ContentWrapper>
       {activeModal && (
@@ -68,15 +106,15 @@ const Landing = () => {
 };
 
 const RsvpButton = styled.button`
-padding: 6px 10px;
-margin-top: 24px;
-font-size: 16px;
-line-height: 20px;
-color: black;
-border-radius: 8px;
-background: white;
-border: 1px solid black;
-cursor: pointer;
+  padding: 6px 10px;
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 20px;
+  color: black;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid black;
+  cursor: pointer;
 `;
 
 const RsvpFormWrapper = styled.div`
@@ -84,7 +122,7 @@ const RsvpFormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 500px;
-  height: 600px;
+  height: 300px;
   padding: 24px;
 `;
 
@@ -93,7 +131,20 @@ const RsvpWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 500px;
-  height: 600px;
+  height: 300px;
+  padding: 24px;
+`;
+
+const ActionButton = styled.button`
+  padding: 6px 10px;
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 20px;
+  color: black;
+  border-radius: 8px;
+  background: #39CA8E;
+  border: 1px solid black;
+  cursor: pointer;
 `;
 
 export default Landing;
