@@ -14,6 +14,7 @@ const NavBar = () => {
     <NavWrapper>
       <NavHeader>LOIS & CHRIS</NavHeader>
       <NavSubHeader>XX.XX.2023 | New York</NavSubHeader>
+      <LogoutBtn onClick={() => logoutUser()}>Logout</LogoutBtn>
       <Navigation>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/schedule">Schedule</NavLink>
@@ -22,7 +23,6 @@ const NavBar = () => {
         <NavLink to="/about">About Us</NavLink>
         <NavLink to="/moments">Moments</NavLink>
         <NavLink to="/music">Music</NavLink>
-        <LogoutBtn onClick={() => logoutUser()}>Logout</LogoutBtn>
       </Navigation>
     </NavWrapper>
   )
@@ -63,11 +63,16 @@ const NavLink = styled(Link)`
 `;
 
 const LogoutBtn = styled.button`
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 4px 8px;
+  margin: 4px;
   font-size: 14px;
   color: black;
-  border-radius: 2px;
+  border-radius: 8px;
   background: white;
-  border: none;
+  border: 1px solid black;
   cursor: pointer;
 `;
 
