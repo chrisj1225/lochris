@@ -38,15 +38,15 @@ const Landing = () => {
     } else {
       if (!Object.keys(currentRsvp).length) {
         return (
-          <button onClick={() => setActiveModal('editRsvp')}>
+          <RsvpButton onClick={() => setActiveModal('editRsvp')}>
             RSVP Now
-          </button>
+          </RsvpButton>
         );
       } else {
         return (
-          <button onClick={() => setActiveModal('viewRsvp')}>
+          <RsvpButton onClick={() => setActiveModal('viewRsvp')}>
             View RSVP
-          </button>
+          </RsvpButton>
         );
       }
     }
@@ -67,12 +67,25 @@ const Landing = () => {
   );
 };
 
+const RsvpButton = styled.button`
+padding: 6px 10px;
+margin-top: 24px;
+font-size: 16px;
+line-height: 20px;
+color: black;
+border-radius: 8px;
+background: white;
+border: 1px solid black;
+cursor: pointer;
+`;
+
 const RsvpFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 500px;
   height: 600px;
+  padding: 24px;
 `;
 
 const RsvpWrapper = styled.div`
