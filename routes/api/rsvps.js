@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    const { errors, isValid } = validateRsvp(req.body);
+    const { errors, isValid } = validateRsvp(req.body, req.user.plusOne);
 
     if (!isValid) {
       return res.status(400).json(errors);
@@ -38,15 +38,11 @@ router.post('/',
     const rsvpObj = {
       userId: req.user.id,
       attending: req.body.attending,
-      appetizer: req.body.appetizer,
-      mainCourse: req.body.mainCourse,
     };
 
     const user = await User.findById(req.user.id);
     if (user?.plusOne) {
       rsvpObj.p1Attending = req.body.p1Attending;
-      rsvpObj.p1Appetizer = req.body.p1Appetizer;
-      rsvpObj.p1MainCourse = req.body.p1MainCourse;
     }
 
     const newRsvp = new Rsvp(rsvpObj);
