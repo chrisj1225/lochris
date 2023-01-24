@@ -13,17 +13,25 @@ export const receiveAllRsvps = (rsvps) => ({
   rsvps,
 });
 
-export const fetchAllRsvps = () => dispatch => (
+export const fetchAllRsvps = (callback) => dispatch => (
   rsvpsApi.getAllRsvps()
     .then(res => {
       dispatch(receiveAllRsvps(res.data));
+
+      if (callback) {
+        callback();
+      }
     })
 );
 
-export const fetchUserRsvp = (userId) => dispatch => (
+export const fetchUserRsvp = (userId, callback) => dispatch => (
   rsvpsApi.getUserRsvp(userId)
     .then(res => {
       dispatch(receiveRsvp(res.data));
+
+      if (callback) {
+        callback();
+      }
     })
 );
 
@@ -34,9 +42,13 @@ export const fetchRsvp = (rsvpId) => dispatch => (
     })
 );
 
-export const createNewRsvp = (newRsvp) => dispatch => (
+export const createNewRsvp = (newRsvp, callback) => dispatch => (
   rsvpsApi.createRsvp(newRsvp)
     .then(res => {
       dispatch(receiveRsvp(res.data));
+
+      if (callback) {
+        callback();
+      }
     })
 );
