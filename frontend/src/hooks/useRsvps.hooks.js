@@ -7,7 +7,8 @@ import {
   createNewRsvp,
 } from '../actions/rsvp_actions';
 
-const useRsvps = () => {
+const useRsvps = (userId) => {
+  const [rsvpFetched, setRsvpFetched] = React.useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -15,19 +16,24 @@ const useRsvps = () => {
     allRsvps,
   } = useSelector((state) => state.rsvps);
 
-  const getAllRsvps = () => {
-    dispatch(fetchAllRsvps());
+  const getAllRsvps = (callback) => {
+    dispatch(fetchAllRsvps(callback));
   };
-
-  const getUserRsvp = (userId) => {
-    dispatch(fetchUserRsvp(userId));
+  
+  const getUserRsvp = (userId, callback) => {
+    dispatch(fetchUserRsvp(userId, callback));
   };
-
-  const createRsvp = (data) => {
-    dispatch(createNewRsvp(data));
+  
+  const createRsvp = (data, callback) => {
+    dispatch(createNewRsvp(data, callback));
   }
 
+  React.useEffect(() => {
+    getUserRsvp(userId, () => setRsvpFetched(true));
+  }, []);
+
   return {
+    rsvpFetched,
     currentRsvp,
     allRsvps,
     getAllRsvps,
