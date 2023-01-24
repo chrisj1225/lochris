@@ -14,7 +14,21 @@ const Landing = () => {
     createRsvp,
   } = useRsvps(user.id);
 
-  const [rsvpModalOpen, setRsvpModalOpen] = React.useState(false);
+  const [activeModal, setActiveModal] = React.useState(null);
+
+  const modalObj = {
+    editRsvp: (
+      <RsvpFormWrapper>
+        Hello
+      </RsvpFormWrapper>
+    ),
+    viewRsvp: (
+      <RsvpWrapper>
+        Here is where the RSVP will be displayed
+        <button>Edit Rsvp</button>
+      </RsvpWrapper>
+    )
+  }
 
   const rsvpBtn = () => {
     if (!rsvpFetched) {
@@ -24,14 +38,14 @@ const Landing = () => {
     } else {
       if (!Object.keys(currentRsvp).length) {
         return (
-          <button onClick={() => setRsvpModalOpen(true)}>
+          <button onClick={() => setActiveModal('editRsvp')}>
             RSVP Now
           </button>
         );
       } else {
         return (
-          <button onClick={() => {}}>
-            Edit RSVP
+          <button onClick={() => setActiveModal('viewRsvp')}>
+            View RSVP
           </button>
         );
       }
@@ -41,10 +55,10 @@ const Landing = () => {
   console.log({ user, rsvpFetched, currentRsvp });
   return (
     <ContentWrapper>
-      {rsvpModalOpen && (
+      {activeModal && (
         <Modal
-          content={<div>hello</div>}
-          closeModal={() => setRsvpModalOpen(false)}
+          content={modalObj[activeModal]}
+          closeModal={() => setActiveModal(false)}
         />
       )}
       <Title>This is the landing page</Title>
@@ -52,5 +66,21 @@ const Landing = () => {
     </ContentWrapper>
   );
 };
+
+const RsvpFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 600px;
+`;
+
+const RsvpWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 600px;
+`;
 
 export default Landing;
