@@ -17,15 +17,15 @@ const RsvpSchema = new Schema({
   },
   mainCourse: {
     type: String,
-    required: false,
+    required: true,
   },
   p1Attending: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   p1Appetizer: {
     type: String,
-    required: true,
+    required: false,
   },
   p1MainCourse: {
     type: String,
