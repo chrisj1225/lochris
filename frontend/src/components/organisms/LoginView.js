@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import useSessions from '../../hooks/useSessions.hooks';
-import useSessionErrors from '../../hooks/useSessionErrors.hooks';
+import { useSessions, useSessionErrors } from '../../hooks';
 
 const LoginView = () => {
   const {

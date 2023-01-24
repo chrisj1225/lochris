@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import useSessions from '../../hooks/useSessions.hooks';
+import { useSessions } from '../../hooks';
 
 const NavBar = () => {
 

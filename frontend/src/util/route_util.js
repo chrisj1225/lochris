@@ -1,5 +1,6 @@
 import React from 'react';
-import useSessions from '../hooks/useSessions.hooks';
+
+import { useSessions } from '../hooks';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 
 const Auth = ({ component: Component, path, exact }) => {
