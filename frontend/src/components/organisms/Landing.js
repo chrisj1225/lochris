@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useRsvps, useSessions } from '../../hooks/'
 import { ContentWrapper, Title } from '../../styles/ViewStyles';
-import useRsvps from '../../hooks/useRsvps.hooks';
-import useSessions from '../../hooks/useSessions.hooks';
 
 const Landing = () => {
   const { user } = useSessions();
