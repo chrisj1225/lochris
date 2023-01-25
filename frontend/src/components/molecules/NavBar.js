@@ -6,7 +6,7 @@ import { useSessions } from '../../hooks';
 
 const NavBar = () => {
 
-  const { isAuthenticated, isLoggedIn, logoutUser } = useSessions();
+  const { user, isAuthenticated, isLoggedIn, logoutUser } = useSessions();
 
   if (!isAuthenticated) return null;
 
@@ -14,7 +14,10 @@ const NavBar = () => {
     <NavWrapper>
       <NavHeader>LOIS & CHRIS</NavHeader>
       <NavSubHeader>XX.XX.2023 | New York</NavSubHeader>
-      <LogoutBtn onClick={() => logoutUser()}>Logout</LogoutBtn>
+      <TopMenu>
+        <MenuText>{`Welcome ${user.firstName} ${user.lastName}!`}</MenuText>
+        <LogoutBtn onClick={() => logoutUser()}>Logout</LogoutBtn>
+      </TopMenu>
       <Navigation>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/schedule">Schedule</NavLink>
@@ -62,10 +65,21 @@ const NavLink = styled(Link)`
   text-decoration: none;
 `;
 
-const LogoutBtn = styled.button`
+const TopMenu = styled.div`
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 0;
   top: 0;
+`;
+
+const MenuText = styled.p`
+  margin: 0px;
+  font-size: 14px;
+  line-height: 18px;
+`;
+
+const LogoutBtn = styled.button`
   padding: 4px 8px;
   margin: 4px;
   font-size: 14px;
