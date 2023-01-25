@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const RsvpSchema = new Schema({
   userId: {
-    type: Number,
+    type: String,
     required: true,
   },
   attending: {
