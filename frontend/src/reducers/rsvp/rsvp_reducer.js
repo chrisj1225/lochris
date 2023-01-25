@@ -3,6 +3,10 @@ import {
   RECEIVE_RSVP,
 } from '../../actions/rsvp_actions';
 
+import {
+  RECEIVE_USER_LOGOUT,
+} from '../../actions/session_actions';
+
 const initialState = {
   currentRsvp: {},
   allRsvps: [],
@@ -20,6 +24,8 @@ const rsvpState = (state = initialState, action) => {
         ...state,
         currentRsvp: action.rsvp,
       }
+    case RECEIVE_USER_LOGOUT:
+      return initialState;
     default:
       return state;
   }
