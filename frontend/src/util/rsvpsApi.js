@@ -18,7 +18,7 @@ export const createRsvp = (data) => {
 
 // class rsvpApi {
 
-//   static  createRsvp(data) {
+//   static createRsvp(data) {
 //     let url = `/api/rsvps/`
     
 //     return fetch(url, {

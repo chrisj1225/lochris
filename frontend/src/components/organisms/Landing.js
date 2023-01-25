@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Modal } from '../atoms';
+import { Modal, RadioButton } from '../atoms';
 
 import { useRsvps, useSessions }from '../../hooks/'
 import { ContentWrapper, Title } from '../../styles/ViewStyles';
@@ -17,6 +17,7 @@ const Landing = () => {
   const [activeModal, setActiveModal] = React.useState(null);
 
   const [rsvpForm, setRsvpForm] = React.useState({
+    userId: user.id,
     attending: null,
   });
 
@@ -31,25 +32,47 @@ const Landing = () => {
         <p>Welcome {user.firstName} {user.lastName}!</p>
         <p>You have not yet RSVPed</p>
         <p>Will you be able to join us on XX/XX/2023?</p>
-        <div onChange={(e) => setRsvpForm({
-          ...rsvpForm,
-          attending: e.target.value,
-        })}>
-          <input type="radio" id="y" name="attending" value="y" />
-          <label for="y">Joyfully Accept</label>
-          <input type="radio" id="n" name="attending" value="n" />
-          <label for="n">Regretfully Decline</label>
+        <div>
+          <RadioButton id="accept"
+            text="Joyfully Accept" 
+            onChange={(e) => setRsvpForm({
+              ...rsvpForm,
+              attending: e.target.value,
+            })}
+            name="attending"
+            value={true}
+          />
+          <RadioButton id="decline"
+            text="Regretfully Decline" 
+            onChange={(e) => setRsvpForm({
+              ...rsvpForm,
+              attending: e.target.value,
+            })}
+            name="attending"
+            value={false}
+          />
         </div>
         {user.plusOne && <>
           <p>{`Will ${user.plusOne} be able to join us?`}</p>
-          <div onChange={(e) => setRsvpForm({
-            ...rsvpForm,
-            p1Attending: e.target.value,
-          })}>
-            <input type="radio" id="y" name="p1attending" value="y" />
-            <label for="y">Joyfully Accept</label>
-            <input type="radio" id="n" name="p1attending" value="n" />
-            <label for="n">Regretfully Decline</label>
+          <div>
+            <RadioButton id="p1accept"
+              text="Joyfully Accept" 
+              onChange={(e) => setRsvpForm({
+                ...rsvpForm,
+                p1Attending: e.target.value,
+              })}
+              name="p1attending"
+              value={true}
+            />
+            <RadioButton id="p1decline"
+              text="Regretfully Decline" 
+              onChange={(e) => setRsvpForm({
+                ...rsvpForm,
+                p1Attending: e.target.value,
+              })}
+              name="p1attending"
+              value={false}
+            />
           </div>
         </>}
         <ActionButton onClick={handleCreateRsvp}>RSVP</ActionButton>

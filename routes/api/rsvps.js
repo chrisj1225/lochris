@@ -35,7 +35,8 @@ router.post('/',
     }
 
     const rsvpObj = {
-      userId: req.user.id,
+      // userId: req.user.id,
+      userId: req.body.userId,
       attending: req.body.attending,
     };
 
