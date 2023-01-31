@@ -8,14 +8,14 @@ const router = express.Router();
 
 // fetch all rsvps
 router.get('/', async (req, res) => {
-  const rsvp = await Rsvp.find();
+  const rsvps = await Rsvp.find();
   res.json(rsvps);
 });
 
 // fetch a user's rsvp
 router.get('/user/:user_id', async (req, res) => {
   const rsvp = await Rsvp.find({ userId: req.params.user_id });
-  res.json(rsvp);
+  res.json(rsvp[0]);
 });
 
 // fetch single rsvp by id
