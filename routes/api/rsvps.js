@@ -14,8 +14,8 @@ router.get('/', async (req, res) => {
 
 // fetch a user's rsvp
 router.get('/user/:user_id', async (req, res) => {
-  const rsvp = await Rsvp.find({ user: req.params.user_id });
-  res.json(rsvp[0]);
+  const rsvp = await Rsvp.find({ userId: req.params.user_id });
+  res.json(rsvp);
 });
 
 // fetch single rsvp by id

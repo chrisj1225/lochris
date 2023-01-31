@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const RsvpSchema = new Schema({
   userId: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'users',
   },
   attending: {
     type: Boolean,
