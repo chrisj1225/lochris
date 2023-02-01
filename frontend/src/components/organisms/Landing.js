@@ -31,74 +31,79 @@ const Landing = () => {
   const handleCreateRsvp = e => {
     e.preventDefault();
     createRsvp(rsvpForm);
-  } 
+  };
+
+  const rsvpFormBody = () => <RsvpFormWrapper>
+    <p>Will you be able to join us on XX/XX/2023?</p>
+    <div>
+      <RadioButton id="accept"
+        text="Joyfully Accept" 
+        onChange={(e) => setRsvpForm({
+          ...rsvpForm,
+          attending: e.target.value,
+        })}
+        name="attending"
+        checked={rsvpForm.attending}
+        value={true}
+      />
+      <RadioButton id="decline"
+        text="Regretfully Decline" 
+        onChange={(e) => setRsvpForm({
+          ...rsvpForm,
+          attending: e.target.value,
+        })}
+        name="attending"
+        checked={!rsvpForm.attending}
+        value={false}
+      />
+    </div>
+    {user.plusOne && <>
+      <p>{`Will ${user.plusOne} be able to join us?`}</p>
+      <div>
+        <RadioButton id="p1accept"
+          text="Joyfully Accept" 
+          onChange={(e) => setRsvpForm({
+            ...rsvpForm,
+            p1Attending: e.target.value,
+          })}
+          name="p1attending"
+          checked={rsvpForm.p1Attending}
+          value={true}
+        />
+        <RadioButton id="p1decline"
+          text="Regretfully Decline" 
+          onChange={(e) => setRsvpForm({
+            ...rsvpForm,
+            p1Attending: e.target.value,
+          })}
+          name="p1attending"
+          checked={!rsvpForm.p1Attending}
+          value={false}
+        />
+      </div>
+      <ActionButton onClick={handleCreateRsvp}>RSVP</ActionButton>
+    </>}
+  </RsvpFormWrapper>
 
   const modalObj = {
     createRsvp: (
-      <RsvpFormWrapper>
+      <RsvpModal>
         <p>Welcome {user.firstName} {user.lastName}!</p>
         <p>You have not yet RSVPed</p>
-        <p>Will you be able to join us on XX/XX/2023?</p>
-        <div>
-          <RadioButton id="accept"
-            text="Joyfully Accept" 
-            onChange={(e) => setRsvpForm({
-              ...rsvpForm,
-              attending: e.target.value,
-            })}
-            name="attending"
-            checked={rsvpForm.attending}
-            value={true}
-          />
-          <RadioButton id="decline"
-            text="Regretfully Decline" 
-            onChange={(e) => setRsvpForm({
-              ...rsvpForm,
-              attending: e.target.value,
-            })}
-            name="attending"
-            checked={!rsvpForm.attending}
-            value={false}
-          />
-        </div>
-        {user.plusOne && <>
-          <p>{`Will ${user.plusOne} be able to join us?`}</p>
-          <div>
-            <RadioButton id="p1accept"
-              text="Joyfully Accept" 
-              onChange={(e) => setRsvpForm({
-                ...rsvpForm,
-                p1Attending: e.target.value,
-              })}
-              name="p1attending"
-              checked={rsvpForm.p1Attending}
-              value={true}
-            />
-            <RadioButton id="p1decline"
-              text="Regretfully Decline" 
-              onChange={(e) => setRsvpForm({
-                ...rsvpForm,
-                p1Attending: e.target.value,
-              })}
-              name="p1attending"
-              checked={!rsvpForm.p1Attending}
-              value={false}
-            />
-          </div>
-        </>}
-        <ActionButton onClick={handleCreateRsvp}>RSVP</ActionButton>
-      </RsvpFormWrapper>
+        {rsvpFormBody()}
+      </RsvpModal>
     ),
     editRsvp: (
-      <RsvpFormWrapper>
+      <RsvpModal>
         <p>Welcome Back {user.firstName} {user.lastName}!</p>
-      </RsvpFormWrapper>
+        {rsvpFormBody()}
+      </RsvpModal>
     ),
     viewRsvp: (
-      <RsvpWrapper>
+      <RsvpModal>
         <p>Here is where the RSVP will be displayed</p>
-        <button>Edit Rsvp</button>
-      </RsvpWrapper>
+        <button onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</button>
+      </RsvpModal>
     )
   }
 
@@ -151,7 +156,7 @@ const RsvpButton = styled.button`
   cursor: pointer;
 `;
 
-const RsvpFormWrapper = styled.div`
+const RsvpModal = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,13 +165,10 @@ const RsvpFormWrapper = styled.div`
   padding: 24px;
 `;
 
-const RsvpWrapper = styled.div`
+const RsvpFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-  height: 300px;
-  padding: 24px;
 `;
 
 const ActionButton = styled.button`
