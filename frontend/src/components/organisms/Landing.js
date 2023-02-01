@@ -43,7 +43,7 @@ const Landing = () => {
           attending: e.target.value,
         })}
         name="attending"
-        checked={rsvpForm.attending}
+        checked={currentRsvp && rsvpForm.attending}
         value={true}
       />
       <RadioButton id="decline"
@@ -53,7 +53,7 @@ const Landing = () => {
           attending: e.target.value,
         })}
         name="attending"
-        checked={!rsvpForm.attending}
+        checked={currentRsvp && !rsvpForm.attending}
         value={false}
       />
     </div>
@@ -68,7 +68,7 @@ const Landing = () => {
             p1Attending: e.target.value,
           })}
           name="p1attending"
-          checked={rsvpForm.p1Attending}
+          checked={currentRsvp && rsvpForm.p1Attending}
           value={true}
         />
         <RadioButton id="p1decline"
@@ -78,7 +78,7 @@ const Landing = () => {
             p1Attending: e.target.value,
           })}
           name="p1attending"
-          checked={!rsvpForm.p1Attending}
+          checked={currentRsvp && !rsvpForm.p1Attending}
           value={false}
         />
       </div>
@@ -107,7 +107,6 @@ const Landing = () => {
         <RsvpFormText>Thank you for RSVPing :)</RsvpFormText>
         <br/>
         <RsvpFormText>Your Response:</RsvpFormText>
-        <br/>
         <RsvpFormText>
           {`You (${user.firstName} ${user.lastName}) will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
         </RsvpFormText>
