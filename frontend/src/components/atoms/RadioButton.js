@@ -23,7 +23,9 @@ const RadioBtnWrapper = styled.div`
 `;
 
 const RadioLabel = styled.label`
-
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
 `;
 
 const RadioBtnInput = styled.input`

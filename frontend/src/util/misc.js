@@ -9,3 +9,9 @@ export const populateFormFromRsvp = (user, currentRsvp) => {
   }
   return rsvpForm;
 };
+
+export const mapModaltoButton = {
+  'createRsvp': 'RSVP',
+  'editRsvp': 'Update RSVP',
+  'viewRsvp': 'Edit RSVP',
+};

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Modal, RadioButton } from '../atoms';
 
 import { useRsvps, useSessions }from '../../hooks/'
-import { populateFormFromRsvp } from '../../util/misc';
-import { ContentWrapper, Title } from '../../styles/ViewStyles';
+import { mapModaltoButton, populateFormFromRsvp } from '../../util/misc';
+import { ActionButton, ContentWrapper, Title } from '../../styles/ViewStyles';
 
 const Landing = () => {
   const { user } = useSessions();
@@ -34,7 +34,7 @@ const Landing = () => {
   };
 
   const rsvpFormBody = () => <RsvpFormWrapper>
-    <p>Will you be able to join us on XX/XX/2023?</p>
+    <RsvpFormText>Will you be able to join us on XX/XX/2023?</RsvpFormText>
     <div>
       <RadioButton id="accept"
         text="Joyfully Accept" 
@@ -57,8 +57,9 @@ const Landing = () => {
         value={false}
       />
     </div>
+    <br/>
     {user.plusOne && <>
-      <p>{`Will ${user.plusOne} be able to join us?`}</p>
+      <RsvpFormText>{`Will ${user.plusOne} be able to join us?`}</RsvpFormText>
       <div>
         <RadioButton id="p1accept"
           text="Joyfully Accept" 
@@ -81,28 +82,39 @@ const Landing = () => {
           value={false}
         />
       </div>
-      <ActionButton onClick={handleCreateRsvp}>RSVP</ActionButton>
     </>}
   </RsvpFormWrapper>
 
   const modalObj = {
     createRsvp: (
       <RsvpModal>
-        <p>Welcome {user.firstName} {user.lastName}!</p>
-        <p>You have not yet RSVPed</p>
+        <RsvpFormText>Welcome {user.firstName} {user.lastName}!</RsvpFormText>
+        <RsvpFormText>You have not yet RSVPed</RsvpFormText>
         {rsvpFormBody()}
+        <RsvpButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</RsvpButton>
       </RsvpModal>
     ),
     editRsvp: (
       <RsvpModal>
-        <p>Welcome Back {user.firstName} {user.lastName}!</p>
+        <RsvpFormText>Welcome Back {user.firstName} {user.lastName}!</RsvpFormText>
         {rsvpFormBody()}
+        <RsvpButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</RsvpButton>
       </RsvpModal>
     ),
     viewRsvp: (
       <RsvpModal>
-        <p>Here is where the RSVP will be displayed</p>
-        <button onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</button>
+        <RsvpFormText>Welcome Back {user.firstName} {user.lastName}!</RsvpFormText>
+        <RsvpFormText>Thank you for RSVPing :)</RsvpFormText>
+        <br/>
+        <RsvpFormText>Your Response:</RsvpFormText>
+        <br/>
+        <RsvpFormText>
+          {`You (${user.firstName} ${user.lastName}) will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
+        </RsvpFormText>
+        {user.plusOne && <RsvpFormText>
+          {`${user.plusOne} will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
+        </RsvpFormText>}
+        <RsvpButton onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</RsvpButton>
       </RsvpModal>
     )
   }
@@ -115,15 +127,15 @@ const Landing = () => {
     } else {
       if (!Object.keys(currentRsvp).length) {
         return (
-          <RsvpButton onClick={() => setActiveModal('createRsvp')}>
+          <ActionButton onClick={() => setActiveModal('createRsvp')}>
             RSVP Now
-          </RsvpButton>
+          </ActionButton>
         );
       } else {
         return (
-          <RsvpButton onClick={() => setActiveModal('viewRsvp')}>
+          <ActionButton onClick={() => setActiveModal('viewRsvp')}>
             View RSVP
-          </RsvpButton>
+          </ActionButton>
         );
       }
     }
@@ -144,18 +156,6 @@ const Landing = () => {
   );
 };
 
-const RsvpButton = styled.button`
-  padding: 6px 10px;
-  margin-top: 24px;
-  font-size: 16px;
-  line-height: 20px;
-  color: black;
-  border-radius: 8px;
-  background: white;
-  border: 1px solid black;
-  cursor: pointer;
-`;
-
 const RsvpModal = styled.div`
   display: flex;
   flex-direction: column;
@@ -171,16 +171,15 @@ const RsvpFormWrapper = styled.div`
   align-items: center;
 `;
 
-const ActionButton = styled.button`
+const RsvpFormText = styled.p`
+  font-size: 15px;
+  line-height: 19px;
+  margin: 0px 0px 8px 0px;
+`;
+
+const RsvpButton = styled(ActionButton)`
   padding: 6px 10px;
-  margin-top: 24px;
-  font-size: 16px;
-  line-height: 20px;
-  color: black;
-  border-radius: 8px;
-  background: #39CA8E;
-  border: 1px solid black;
-  cursor: pointer;
+  margin-top: auto;
 `;
 
 export default Landing;

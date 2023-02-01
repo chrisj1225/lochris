@@ -12,7 +12,7 @@ const NavBar = () => {
 
   return (
     <NavWrapper>
-      <NavHeader>LOIS & CHRIS</NavHeader>
+      <NavHeader>Lois & Chris</NavHeader>
       <NavSubHeader>XX.XX.2023 | New York</NavSubHeader>
       <TopMenu>
         <MenuText>{`Welcome ${user.firstName} ${user.lastName}!`}</MenuText>
@@ -88,6 +88,10 @@ const LogoutBtn = styled.button`
   background: white;
   border: 1px solid black;
   cursor: pointer;
+
+  &:hover {
+    background: #F36060;
+  }
 `;
 
 export default NavBar;
