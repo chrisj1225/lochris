@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Modal, RadioButton } from '../atoms';
 
 import { useRsvps, useSessions }from '../../hooks/'
+import { populateFormFromRsvp } from '../../util/misc';
 import { ContentWrapper, Title } from '../../styles/ViewStyles';
 
 const Landing = () => {
@@ -20,6 +21,12 @@ const Landing = () => {
     userId: user.id,
     attending: null,
   });
+
+  React.useEffect(() => {
+    if (currentRsvp) {
+      setRsvpForm(populateFormFromRsvp(user, currentRsvp));
+    }
+  }, [currentRsvp]);
 
   const handleCreateRsvp = e => {
     e.preventDefault();
@@ -40,6 +47,7 @@ const Landing = () => {
               attending: e.target.value,
             })}
             name="attending"
+            checked={rsvpForm.attending}
             value={true}
           />
           <RadioButton id="decline"
@@ -49,6 +57,7 @@ const Landing = () => {
               attending: e.target.value,
             })}
             name="attending"
+            checked={!rsvpForm.attending}
             value={false}
           />
         </div>
@@ -62,6 +71,7 @@ const Landing = () => {
                 p1Attending: e.target.value,
               })}
               name="p1attending"
+              checked={rsvpForm.p1Attending}
               value={true}
             />
             <RadioButton id="p1decline"
@@ -71,6 +81,7 @@ const Landing = () => {
                 p1Attending: e.target.value,
               })}
               name="p1attending"
+              checked={!rsvpForm.p1Attending}
               value={false}
             />
           </div>

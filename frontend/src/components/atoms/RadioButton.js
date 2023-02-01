@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const RadioButton = ({ id, text, onChange, name, value }) => (
+const RadioButton = ({ id, text, onChange, name, checked, value }) => (
   <RadioBtnWrapper>
     <RadioLabel htmlFor={id}>
-      <input id={id} onChange={onChange} type="radio" name={name} value={value} />
+      <input id={id}
+        onChange={onChange}
+        type="radio"
+        name={name}
+        checked={checked}
+        value={value} />
       {text}
     </RadioLabel>
   </RadioBtnWrapper>
