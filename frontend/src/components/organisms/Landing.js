@@ -43,7 +43,7 @@ const Landing = () => {
           attending: e.target.value,
         })}
         name="attending"
-        checked={currentRsvp && rsvpForm.attending}
+        checked={rsvpForm.attending === true}
         value={true}
       />
       <RadioButton id="decline"
@@ -53,7 +53,7 @@ const Landing = () => {
           attending: e.target.value,
         })}
         name="attending"
-        checked={currentRsvp && !rsvpForm.attending}
+        checked={rsvpForm.attending === false}
         value={false}
       />
     </div>
@@ -68,7 +68,7 @@ const Landing = () => {
             p1Attending: e.target.value,
           })}
           name="p1attending"
-          checked={currentRsvp && rsvpForm.p1Attending}
+          checked={rsvpForm.p1Attending === true}
           value={true}
         />
         <RadioButton id="p1decline"
@@ -78,7 +78,7 @@ const Landing = () => {
             p1Attending: e.target.value,
           })}
           name="p1attending"
-          checked={currentRsvp && !rsvpForm.p1Attending}
+          checked={rsvpForm.p1Attending === false}
           value={false}
         />
       </div>
