@@ -53,6 +53,9 @@ const ModalContentWrapper = styled.div`
   transform: translate(-50%, -50%);
   margin-right: auto;
   margin-left: auto;
+  max-height: 90%;
+  max-width: 90%;
+  overflow: auto;
 
   -webkit-animation: fadein 0.25s ease-in-out; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 0.25s ease-in-out; /* Firefox < 16 */
