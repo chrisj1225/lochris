@@ -22,11 +22,11 @@ const NavBar = () => {
       </TopMenu>
       <Navigation>
         <NavLink to="/" locationpath={path}>Home</NavLink>
-        <NavLink to="/schedule" locationpath={path}>Schedule</NavLink>
-        <NavLink to="/registry" locationpath={path}>Registry</NavLink>
-        <NavLink to="/travel" locationpath={path}>Travel</NavLink>
         <NavLink to="/about" locationpath={path}>About Us</NavLink>
         <NavLink to="/moments" locationpath={path}>Moments</NavLink>
+        <NavLink to="/travel" locationpath={path}>Travel</NavLink>
+        <NavLink to="/schedule" locationpath={path}>Schedule</NavLink>
+        <NavLink to="/registry" locationpath={path}>Registry</NavLink>
         <NavLink to="/music" locationpath={path}>Music</NavLink>
       </Navigation>
     </NavWrapper>

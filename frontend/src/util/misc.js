@@ -20,16 +20,16 @@ export const getPageColorFromPath = (pathName) => {
   switch (pathName) {
     case '/':
       return 'white';
-    case '/schedule':
-      return '#fce1e4';
-    case '/registry':
-      return '#fcf4dd';
-    case '/travel':
-      return '#9cadce';
     case '/about':
       return '#d1cfe2';
     case '/moments':
       return '#daeaf6';
+    case '/travel':
+      return '#9cadce';
+    case '/schedule':
+      return '#fce1e4';
+    case '/registry':
+      return '#fcf4dd';
     case '/music':
       return '#c3ebd8';
     default:
