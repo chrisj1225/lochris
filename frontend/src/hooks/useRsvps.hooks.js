@@ -29,8 +29,8 @@ const useRsvps = (userId) => {
     dispatch(createNewRsvp(data, callback));
   }
 
-  const updateRsvp = (data, callback) => {
-    dispatch(editRsvp(data, callback));
+  const updateRsvp = (rsvpId, data, callback) => {
+    dispatch(editRsvp(rsvpId, data, callback));
   }
 
   React.useEffect(() => {

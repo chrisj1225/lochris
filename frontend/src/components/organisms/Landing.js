@@ -33,13 +33,17 @@ const Landing = () => {
 
   const handleCreateRsvp = e => {
     e.preventDefault();
-    createRsvp(rsvpForm);
+    createRsvp(rsvpForm, () => {
+      setActiveModal('confirmation');
+    });
   };
 
   const handleUpdateRsvp = e => {
     e.preventDefault();
-    updateRsvp(currentRsvp._id, rsvpForm);
-  }
+    updateRsvp(currentRsvp._id, rsvpForm, () => {
+      setActiveModal('confirmation');
+    });
+  };
 
   const rsvpFormBody = () => <RsvpFormWrapper>
     <GeneralText>Will you be able to join us on XX/XX/2023?</GeneralText>
@@ -51,8 +55,8 @@ const Landing = () => {
           attending: e.target.value,
         })}
         name="attending"
-        checked={rsvpForm.attending === true}
-        value={true}
+        checked={rsvpForm.attending === 'y'}
+        value={'y'}
       />
       <RadioButton id="decline"
         text="Regretfully Decline" 
@@ -61,8 +65,8 @@ const Landing = () => {
           attending: e.target.value,
         })}
         name="attending"
-        checked={rsvpForm.attending === false}
-        value={false}
+        checked={rsvpForm.attending === 'n'}
+        value={'n'}
       />
     </div>
     <br/>
@@ -76,8 +80,8 @@ const Landing = () => {
             p1Attending: e.target.value,
           })}
           name="p1attending"
-          checked={rsvpForm.p1Attending === true}
-          value={true}
+          checked={rsvpForm.p1Attending === 'y'}
+          value={'y'}
         />
         <RadioButton id="p1decline"
           text="Regretfully Decline" 
@@ -86,8 +90,8 @@ const Landing = () => {
             p1Attending: e.target.value,
           })}
           name="p1attending"
-          checked={rsvpForm.p1Attending === false}
-          value={false}
+          checked={rsvpForm.p1Attending === 'n'}
+          value={'n'}
         />
       </div>
     </>}
@@ -116,12 +120,18 @@ const Landing = () => {
         <br/>
         <GeneralText>Your Response:</GeneralText>
         <GeneralText>
-          {`You (${user.firstName} ${user.lastName}) will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
+          {`You (${user.firstName} ${user.lastName}) will ${currentRsvp.attending === 'y' ? 'attend' : 'not attend'}`}
         </GeneralText>
         {user.plusOne && <GeneralText>
-          {`${user.plusOne} will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
+          {`${user.plusOne} will ${currentRsvp.attending === 'y' ? 'attend' : 'not attend'}`}
         </GeneralText>}
         <ConfirmButton onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</ConfirmButton>
+      </RsvpModal>
+    ),
+    confirmation: (
+      <RsvpModal>
+        <GeneralText>Thank you for submitting your RSVP :)</GeneralText>
+        <ConfirmButton onClick={() => setActiveModal(null)}>Close</ConfirmButton>
       </RsvpModal>
     )
   }

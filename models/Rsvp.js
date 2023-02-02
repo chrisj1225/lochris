@@ -9,11 +9,11 @@ const RsvpSchema = new Schema({
     ref: 'users',
   },
   attending: {
-    type: Boolean,
+    type: String,
     required: true,
   },
   p1Attending: {
-    type: Boolean,
+    type: String,
     required: false,
   },
 }, {
