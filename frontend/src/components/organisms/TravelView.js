@@ -34,22 +34,20 @@ const TravelView = () => {
       title: "Our favorite restaurants",
       content: <GeneralText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus bibendum sapien, at vestibulum eros. Nam in augue dapibus, lacinia nunc quis, aliquam neque.</GeneralText>
     },
-  ]
+  ];
 
   return (
     <ContentWrapper path={location.pathname}>
       <Title>Travel</Title>
       <TravelWrapper>
         {travelItems.map((item, i) => (
-          <>
-            <TravelItem
-              key={`${item.type}-${i}`}
-              type={item.type}
-              title={item.title}
-              content={item.content}
-            />
-            {i !== travelItems.length - 1 ? <GreyLine /> : null}
-          </>
+          <TravelItem
+            key={`${item.type}-${i}`}
+            showGreyLine={i !== travelItems.length - 1}
+            type={item.type}
+            title={item.title}
+            content={item.content}
+          />
         ))}
       </TravelWrapper>
     </ContentWrapper>
@@ -61,13 +59,6 @@ const TravelWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 600px;
-`;
-
-const GreyLine = styled.div`
-  width: 80%;
-  height: 0px;
-  border-top: 1px solid #656D78;
-  margin-bottom: 16px;
 `;
 
 export default TravelView;

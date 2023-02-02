@@ -40,3 +40,10 @@ export const ActionButton = styled.button`
     background: #F2AAC9;
   }
 `;
+
+export const GreyLine = styled.div`
+  width: 80%;
+  height: 0px;
+  border-top: 1px solid #656D78;
+  margin-bottom: 16px;
+`;

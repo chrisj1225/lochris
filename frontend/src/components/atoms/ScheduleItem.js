@@ -16,7 +16,10 @@ const ScheduleItem = ({ startTime, endTime, address, name, description, dressCod
         <DetailsTitle>{name}</DetailsTitle>
         <DetailsAddress>{address}</DetailsAddress>
         <GeneralText>{description}</GeneralText>
-        <GeneralText style={{ display: 'flex', alignItems: 'center' }}>Dress Code: <DressCodeText>{dressCode}</DressCodeText></GeneralText>
+        <DressCodeText>
+          <GeneralText>Dress Code:</GeneralText>
+          <BoldText>{dressCode}</BoldText>
+        </DressCodeText>
       </DetailsDiv>
     </ScheduleItemWrapper>
   );
@@ -53,7 +56,12 @@ const DetailsAddress = styled(GeneralText)`
   margin-bottom: 8px;
 `;
 
-const DressCodeText = styled(GeneralText)`
+const DressCodeText = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const BoldText = styled(GeneralText)`
   font-weight: 600;
   margin: 0px 0px 0px 8px;
 `;

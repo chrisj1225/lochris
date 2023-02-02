@@ -2,20 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { mapTypeToTravelIcon } from '../../util/misc';
-import { GeneralText } from '../../styles/ViewStyles';
+import { GeneralText, GreyLine } from '../../styles/ViewStyles';
 
-const TravelItem = ({ type, title, content }) => {
+const TravelItem = ({ showGreyLine, type, title, content }) => {
 
   return (
-    <TravelItemWrapper>
-      <IconDiv>
-        {mapTypeToTravelIcon(type)}
-      </IconDiv>
-      <DetailsDiv>
-        <TravelTitle>{title}</TravelTitle>
-        {content}
-      </DetailsDiv>
-    </TravelItemWrapper>
+    <>
+      <TravelItemWrapper>
+        <IconDiv>
+          {mapTypeToTravelIcon(type)}
+        </IconDiv>
+        <DetailsDiv>
+          <TravelTitle>{title}</TravelTitle>
+          {content}
+        </DetailsDiv>
+      </TravelItemWrapper>
+      {showGreyLine && <GreyLine />}
+    </>
   );
 };
 
