@@ -26,7 +26,7 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
 router.get('/', 
   passport.authenticate('jwt', {session: false}),
   async (req, res) => {
-  const allUsers = await User.find().sort({ lastName: -1 });
+  const allUsers = await User.find().sort({ lastName: 1 });
   res.json(allUsers);
 });
 
