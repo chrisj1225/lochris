@@ -20,8 +20,8 @@ const LoginView = () => {
     return e => setState({
       ...state,
       [field]: e.currentTarget.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const LoginView = () => {
     }
 
     loginUser(user);
-  }
+  };
 
   const emailError = errors['email'];
   const passwordError = errors['password'];

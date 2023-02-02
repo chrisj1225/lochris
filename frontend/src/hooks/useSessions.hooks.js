@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from '../actions/session_actions';
+import { signup, login, logout } from '../actions/session_actions';
 
 const useSessions = () => {
   const dispatch = useDispatch();
@@ -9,6 +9,10 @@ const useSessions = () => {
     user,
     isLoggedIn,
   } = useSelector((state) => state.session);
+
+  const signupGuest = (user, callback) => {
+    dispatch(signup(user, callback));
+  }
 
   const loginUser = (user) => {
     dispatch(login(user));
@@ -24,6 +28,7 @@ const useSessions = () => {
     isLoggedIn,
     loginUser,
     logoutUser,
+    signupGuest,
   }
 };
 

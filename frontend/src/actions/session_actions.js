@@ -24,11 +24,15 @@ export const receiveErrors = errors => ({
   errors,
 });
 
-export const signup = user => dispatch => (
+export const signup = (user, callback) => dispatch => (
   sessionsApi.signup(user)
-    .then(() => (
-      dispatch(receiveUserLogIn())
-    ), err => (
+    .then(res => {
+      console.log('user successfully registered!');
+
+      if (callback) {
+        callback();
+      }
+    }, err => (
       dispatch(receiveErrors(err.response.data))
     ))
 );
