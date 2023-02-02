@@ -6,7 +6,7 @@ import { Modal, RadioButton } from '../atoms';
 
 import { useRsvps, useSessions }from '../../hooks/'
 import { mapModaltoButton, populateFormFromRsvp } from '../../util/misc';
-import { ActionButton, ContentWrapper, Title } from '../../styles/ViewStyles';
+import { ActionButton, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
 const Landing = () => {
   const { user } = useSessions();
@@ -36,7 +36,7 @@ const Landing = () => {
   };
 
   const rsvpFormBody = () => <RsvpFormWrapper>
-    <RsvpFormText>Will you be able to join us on XX/XX/2023?</RsvpFormText>
+    <GeneralText>Will you be able to join us on XX/XX/2023?</GeneralText>
     <div>
       <RadioButton id="accept"
         text="Joyfully Accept" 
@@ -61,7 +61,7 @@ const Landing = () => {
     </div>
     <br/>
     {user.plusOne && <>
-      <RsvpFormText>{`Will ${user.plusOne} be able to join us?`}</RsvpFormText>
+      <GeneralText>{`Will ${user.plusOne} be able to join us?`}</GeneralText>
       <div>
         <RadioButton id="p1accept"
           text="Joyfully Accept" 
@@ -90,31 +90,31 @@ const Landing = () => {
   const modalObj = {
     createRsvp: (
       <RsvpModal>
-        <RsvpFormText>Welcome {user.firstName} {user.lastName}!</RsvpFormText>
-        <RsvpFormText>You have not yet RSVPed</RsvpFormText>
+        <GeneralText>Welcome {user.firstName} {user.lastName}!</GeneralText>
+        <GeneralText>You have not yet RSVPed</GeneralText>
         {rsvpFormBody()}
         <ConfirmButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</ConfirmButton>
       </RsvpModal>
     ),
     editRsvp: (
       <RsvpModal>
-        <RsvpFormText>Welcome Back {user.firstName} {user.lastName}!</RsvpFormText>
+        <GeneralText>Welcome Back {user.firstName} {user.lastName}!</GeneralText>
         {rsvpFormBody()}
         <ConfirmButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</ConfirmButton>
       </RsvpModal>
     ),
     viewRsvp: (
       <RsvpModal>
-        <RsvpFormText>Welcome Back {user.firstName} {user.lastName}!</RsvpFormText>
-        <RsvpFormText>Thank you for RSVPing :)</RsvpFormText>
+        <GeneralText>Welcome Back {user.firstName} {user.lastName}!</GeneralText>
+        <GeneralText>Thank you for RSVPing :)</GeneralText>
         <br/>
-        <RsvpFormText>Your Response:</RsvpFormText>
-        <RsvpFormText>
+        <GeneralText>Your Response:</GeneralText>
+        <GeneralText>
           {`You (${user.firstName} ${user.lastName}) will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
-        </RsvpFormText>
-        {user.plusOne && <RsvpFormText>
+        </GeneralText>
+        {user.plusOne && <GeneralText>
           {`${user.plusOne} will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
-        </RsvpFormText>}
+        </GeneralText>}
         <ConfirmButton onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</ConfirmButton>
       </RsvpModal>
     )
@@ -152,7 +152,33 @@ const Landing = () => {
         />
       )}
       <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
       {rsvpBtn()}
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
+      <Title>This is the landing page</Title>
     </ContentWrapper>
   );
 };
@@ -170,12 +196,6 @@ const RsvpFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const RsvpFormText = styled.p`
-  font-size: 15px;
-  line-height: 19px;
-  margin: 0px 0px 8px 0px;
 `;
 
 const RsvpButton = styled(ActionButton)`
