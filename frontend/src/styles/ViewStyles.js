@@ -8,7 +8,6 @@ export const ContentWrapper = styled.div`
   align-items: center;
   height: 100%;
   padding: 0 10% 24px 10%;
-  height: 100%;
   background-color: ${(props) => getPageColorFromPath(props.path)};
 `;
 

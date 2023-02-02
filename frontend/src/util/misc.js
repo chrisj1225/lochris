@@ -54,3 +54,26 @@ export const travelIconMap = {
 export const mapTypeToTravelIcon = (type) => {
   return travelIconMap[type];
 };
+
+export const getUserRsvpStatus = (rsvp) => {
+  if (rsvp?.attending) {
+    return rsvp.attending === 'y' ? 'attending' : 'declined';
+  } else {
+    return 'pending';
+  }
+};
+
+export const statusColorMap = {
+  attending: '#79DE79',
+  declined: '#FB6962',
+  pending: '#FCFC99',
+}
+
+export const getConfirmedGuestCount = (allRsvps) => {
+  let count = 0;
+  Object.values(allRsvps).forEach((rsvp) => {
+    if (rsvp.attending === 'y') count++;
+    if (rsvp?.p1Attending === 'y') count ++;
+  });
+  return count;
+}

@@ -9,7 +9,12 @@ const router = express.Router();
 // fetch all rsvps
 router.get('/', async (req, res) => {
   const rsvps = await Rsvp.find();
-  res.json(rsvps);
+  const rsvpsMap = {};
+  
+  rsvps.forEach((rsvp) => {
+    rsvpsMap[rsvp.userId] = rsvp;
+  });
+  res.json(rsvpsMap);
 });
 
 // fetch a user's rsvp

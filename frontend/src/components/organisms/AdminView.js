@@ -3,18 +3,21 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { password } from '../../config/keys';
-import { useSessions, useSessionErrors, useUsers, } from '../../hooks';
+import { useRsvps, useSessions, useSessionErrors, useUsers } from '../../hooks';
 import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 import { FormWrapper, InputWrapper, TextInput, ErrorMsg, SubmitButton } from '../../styles/FormStyles';
+import { getUserRsvpStatus, statusColorMap, getConfirmedGuestCount } from '../../util/misc';
 
 const AdminView = () => {
   const location = useLocation();
 
   const {
+    user,
     signupGuest,
   } = useSessions();
   const { errors } = useSessionErrors();
   const { allUsers, getAllUsers } = useUsers();
+  const { allRsvps, getAllRsvps } = useRsvps(user.id);
 
   const defaultRegisterForm = {
     email: '',
@@ -27,6 +30,10 @@ const AdminView = () => {
   };
 
   const [state, setState] = React.useState(defaultRegisterForm);
+
+  React.useEffect(() => {
+    getAllRsvps();
+  }, []);
 
   const updateField = field => {
     return e => setState({
@@ -50,6 +57,7 @@ const AdminView = () => {
     signupGuest(user, () => {
       setState(defaultRegisterForm);
       getAllUsers();
+      getAllRsvps();
     });
   };
 
@@ -98,21 +106,45 @@ const AdminView = () => {
         <GuestItem key="heading">
           <GuestHeading>First Name</GuestHeading>
           <GuestHeading>Last Name</GuestHeading>
-          <GuestHeading>Plus One</GuestHeading>
           <GuestHeading>Attending?</GuestHeading>
+          <GuestHeading>Plus One</GuestHeading>
+          <GuestHeading>P1 Attending?</GuestHeading>
+          <GuestHeading>Status</GuestHeading>
           <GuestHeading>Email</GuestHeading>
         </GuestItem>
-        {allUsers.map((user, userIdx) => (
-          <GuestLineItem key={`${user.lastName}-${userIdx}`}>
-            <GeneralText>{user.firstName}</GeneralText>
-            <GeneralText>{user.lastName}</GeneralText>
-            <GeneralText>{user.plusOne || '-'}</GeneralText>
-            <GeneralText>yes/no</GeneralText>
-            <GeneralText>{user.email}</GeneralText>
-          </GuestLineItem>
-        ))}
+        {allUsers.map((user, userIdx) => {
+          const currGuestRsvp = allRsvps[user._id];
+          const currRsvpStatus = getUserRsvpStatus(currGuestRsvp);
+          const statusColor = statusColorMap[currRsvpStatus];
+
+          return (
+            <GuestLineItem key={`${user.lastName}-${userIdx}`}>
+              <GeneralText>{user.firstName}</GeneralText>
+              <GeneralText>{user.lastName}</GeneralText>
+              <GeneralText>
+                {currGuestRsvp?.attending === 'y'
+                  ? 'yes'
+                  : currGuestRsvp?.attending === 'n'
+                    ? 'no'
+                    : '-'
+                }
+              </GeneralText>
+              <GeneralText>{user.plusOne || '-'}</GeneralText>
+              <GeneralText>
+                {currGuestRsvp?.p1Attending === 'y'
+                  ? 'yes'
+                  : currGuestRsvp?.p1Attending === 'n'
+                    ? 'no'
+                    : '-'
+                }
+              </GeneralText>
+              <StatusCircle color={statusColor}/>
+              <GeneralText>{user.email}</GeneralText>
+            </GuestLineItem>
+          );
+        })}
       </GuestList>
-      <GeneralText>{`Guest Count: ${allUsers.length}`}</GeneralText>
+      <GeneralText>{`Guest Count: ${getConfirmedGuestCount(allRsvps)}`}</GeneralText>
     </ContentWrapper>
   );
 };
@@ -127,13 +159,15 @@ const GuestList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  // overflow-x: auto;
 `;
 
 const GuestItem = styled.div`
 display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 width: 100%;
 padding: 0 8px;
+align-items: center;
 `;
 
 const GuestHeading = styled(GeneralText)`
@@ -144,6 +178,13 @@ const GuestLineItem = styled(GuestItem)`
   &:hover {
     background-color: #bdbdbd;
   }
+`;
+
+const StatusCircle = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: ${props => props.color}
 `;
 
 export default AdminView;

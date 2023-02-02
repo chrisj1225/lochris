@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   currentRsvp: {},
-  allRsvps: [],
+  allRsvps: {},
 }
 
 const rsvpState = (state = initialState, action) => {
