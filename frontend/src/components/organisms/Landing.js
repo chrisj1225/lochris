@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { Modal, RadioButton } from '../atoms';
 
-import { useRsvps, useSessions }from '../../hooks/'
+import { useRsvps, useSessions } from '../../hooks/'
 import { mapModaltoButton, populateFormFromRsvp } from '../../util/misc';
 import { ActionButton, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
@@ -134,7 +134,7 @@ const Landing = () => {
         <ConfirmButton onClick={() => setActiveModal(null)}>Close</ConfirmButton>
       </RsvpModal>
     )
-  }
+  };
 
   const rsvpBtn = () => {
     if (!rsvpFetched) {
@@ -164,7 +164,7 @@ const Landing = () => {
       {activeModal && (
         <Modal
           content={modalObj[activeModal]}
-          closeModal={() => setActiveModal(false)}
+          closeModal={() => setActiveModal(null)}
         />
       )}
       <Title>This is the landing page</Title>
