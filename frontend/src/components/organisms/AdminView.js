@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { password } from '../../config/keys';
-import { useSessions, useSessionErrors } from '../../hooks';
+import { useSessions, useSessionErrors, useUsers, } from '../../hooks';
 import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 import { FormWrapper, InputWrapper, TextInput, ErrorMsg, SubmitButton } from '../../styles/FormStyles';
 
@@ -14,6 +14,7 @@ const AdminView = () => {
     signupGuest,
   } = useSessions();
   const { errors } = useSessionErrors();
+  const { allUsers } = useUsers();
 
   const defaultRegisterForm = {
     email: '',

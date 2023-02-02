@@ -3,6 +3,7 @@ import useOutsideClick from './useOutsideClick';
 import useRsvps from './useRsvps.hooks';
 import useSessionErrors from './useSessionErrors.hooks';
 import useSessions from './useSessions.hooks';
+import useUsers from './useUsers.hooks';
 
 export {
   useEscape,
@@ -10,6 +11,7 @@ export {
   useRsvps,
   useSessionErrors,
   useSessions,
+  useUsers,
 };
 
 export default {
@@ -18,4 +20,5 @@ export default {
   useRsvps,
   useSessionErrors,
   useSessionErrors,
+  useUsers,
 };
