@@ -7,14 +7,22 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: 0 10%;
+  padding: 0 10% 24px 10%;
   height: 100%;
   background-color: ${(props) => getPageColorFromPath(props.path)};
 `;
 
 export const Title = styled.h1`
-  color: navy;
+  font-size: 32px;
+  color: #16191C;
   margin: 0;
+`;
+
+export const GeneralText = styled.p`
+color: #16191C;
+font-size: 14px;
+line-height: 21px;
+margin: 5px 0px;
 `;
 
 export const ActionButton = styled.button`
