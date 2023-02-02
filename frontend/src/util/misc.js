@@ -21,13 +21,13 @@ export const getPageColorFromPath = (pathName) => {
     case '/':
       return 'white';
     case '/schedule':
-      return '#d4afb9';
+      return '#fce1e4';
     case '/registry':
-      return '#d1cfe2';
+      return '#fcf4dd';
     case '/travel':
       return '#9cadce';
     case '/about':
-      return '#7ec4cf';
+      return '#d1cfe2';
     case '/moments':
       return '#daeaf6';
     case '/music':

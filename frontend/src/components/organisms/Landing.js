@@ -93,14 +93,14 @@ const Landing = () => {
         <RsvpFormText>Welcome {user.firstName} {user.lastName}!</RsvpFormText>
         <RsvpFormText>You have not yet RSVPed</RsvpFormText>
         {rsvpFormBody()}
-        <RsvpButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</RsvpButton>
+        <ConfirmButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</ConfirmButton>
       </RsvpModal>
     ),
     editRsvp: (
       <RsvpModal>
         <RsvpFormText>Welcome Back {user.firstName} {user.lastName}!</RsvpFormText>
         {rsvpFormBody()}
-        <RsvpButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</RsvpButton>
+        <ConfirmButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</ConfirmButton>
       </RsvpModal>
     ),
     viewRsvp: (
@@ -115,7 +115,7 @@ const Landing = () => {
         {user.plusOne && <RsvpFormText>
           {`${user.plusOne} will ${currentRsvp.attending ? 'attend' : 'not attend'}`}
         </RsvpFormText>}
-        <RsvpButton onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</RsvpButton>
+        <ConfirmButton onClick={() => setActiveModal('editRsvp')}>Edit Rsvp</ConfirmButton>
       </RsvpModal>
     )
   }
@@ -128,15 +128,15 @@ const Landing = () => {
     } else {
       if (!Object.keys(currentRsvp).length) {
         return (
-          <ActionButton onClick={() => setActiveModal('createRsvp')}>
+          <RsvpButton onClick={() => setActiveModal('createRsvp')}>
             RSVP Now
-          </ActionButton>
+          </RsvpButton>
         );
       } else {
         return (
-          <ActionButton onClick={() => setActiveModal('viewRsvp')}>
+          <RsvpButton onClick={() => setActiveModal('viewRsvp')}>
             View RSVP
-          </ActionButton>
+          </RsvpButton>
         );
       }
     }
@@ -179,6 +179,16 @@ const RsvpFormText = styled.p`
 `;
 
 const RsvpButton = styled(ActionButton)`
+  padding: 14px 14px;
+  background-color: black;
+  color: white;
+
+  &:hover {
+    background-color: #212529;
+  }
+`;
+
+const ConfirmButton = styled(ActionButton)`
   padding: 6px 10px;
   margin-top: auto;
 `;
