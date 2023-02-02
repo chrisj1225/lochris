@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSessions, useSessionErrors } from '../../hooks';
+import { FormWrapper, TextInput, ErrorMsg, SubmitButton } from '../../styles/FormStyles';
 
 const LoginView = () => {
   const {
@@ -75,41 +76,6 @@ const LoginHeader = styled.h1`
   font-size: 24px;
   line-height: 30px;
   font-weight: 600;
-`;
-
-const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  gap: 5px;
-`;
-
-const TextInput = styled.input`
-  width: 100%;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 8px;
-  // margin-bottom: 5px;
-`;
-
-const ErrorMsg = styled.p`
-  font-size: 12px;
-  font-weight: 500;
-  color: red;
-  margin: 0;
-`;
-
-const SubmitButton = styled.button`
-  width: 100px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid black;
-  background: white;
-  cursor: pointer; 
 `;
 
 export default LoginView;
