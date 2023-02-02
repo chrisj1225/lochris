@@ -7,7 +7,7 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  margin-bottom: auto;
+  padding: 0 10%;
   height: 100%;
   background-color: ${(props) => getPageColorFromPath(props.path)};
 `;

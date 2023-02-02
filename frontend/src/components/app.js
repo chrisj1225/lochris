@@ -3,7 +3,8 @@ import { Switch } from 'react-router-dom';
 
 import '../App.css';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import NavBar from './molecules/NavBar';
+import { Footer } from './atoms';
+import { NavBar } from './molecules';
 import {
   Landing,
   LoginView,
@@ -30,6 +31,7 @@ const App = () => (
         <ProtectedRoute exact path="/moments" component={MomentsView} />
         <ProtectedRoute exact path="/music" component={MusicView} />
     </Switch>
+    <Footer />
   </>
 );
 
