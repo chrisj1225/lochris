@@ -23,9 +23,9 @@ const UserSchema = new Schema({
     type: String,
     required: false,
   },
-  isValidated: {
+  superuser: {
     type: Boolean,
-    required: false,
+    required: true,
   }
 }, {
   timestamps: true,

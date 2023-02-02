@@ -19,6 +19,7 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     email: req.user.email,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
+    superuser: req.user.superuser,
   });
 })
 
@@ -43,6 +44,7 @@ router.post('/register', (req, res) => {
           lastName: req.body.lastName,
           password: req.body.password,
           plusOne: req.body.plusOne || null,
+          superuser: req.body.superuser,
         });
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -52,14 +54,14 @@ router.post('/register', (req, res) => {
             newUser
               .save()
               .then(user => {
-                const { id, email, firstName, lastName, plusOne, isValidated } = user;
+                const { id, email, firstName, lastName, plusOne, superuser } = user;
                 const payload = {
                   id,
                   email,
                   firstName,
                   lastName,
                   plusOne,
-                  isValidated
+                  superuser
                 };
                 
                 jwt.sign(
@@ -101,14 +103,14 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const { id, email, firstName, lastName, plusOne, isValidated } = user; 
+            const { id, email, firstName, lastName, plusOne, superuser } = user; 
             const payload = {
               id,
               email,
               firstName,
               lastName,
               plusOne,
-              isValidated
+              superuser
             };
 
             jwt.sign(
