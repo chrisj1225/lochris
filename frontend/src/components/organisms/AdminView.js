@@ -103,13 +103,13 @@ const AdminView = () => {
           <GuestHeading>Email</GuestHeading>
         </GuestItem>
         {allUsers.map((user, userIdx) => (
-          <GuestItem key={`${user.lastName}-${userIdx}`}>
+          <GuestLineItem key={`${user.lastName}-${userIdx}`}>
             <GeneralText>{user.firstName}</GeneralText>
             <GeneralText>{user.lastName}</GeneralText>
             <GeneralText>{user.plusOne || '-'}</GeneralText>
             <GeneralText>yes/no</GeneralText>
             <GeneralText>{user.email}</GeneralText>
-          </GuestItem>
+          </GuestLineItem>
         ))}
       </GuestList>
       <GeneralText>{`Guest Count: ${allUsers.length}`}</GeneralText>
@@ -129,17 +129,20 @@ const GuestList = styled.div`
   align-items: center;
 `;
 
+const GuestItem = styled.div`
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+width: 100%;
+padding: 0 8px;
+`;
+
 const GuestHeading = styled(GeneralText)`
   font-weight: 600;
 `;
 
-const GuestItem = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  width: 100%;
-
+const GuestLineItem = styled(GuestItem)`
   &:hover {
-    background-color: #FEF5ED;
+    background-color: #bdbdbd;
   }
 `;
 
