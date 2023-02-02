@@ -1,3 +1,9 @@
+import { ReactComponent as AirplaneIcon } from '../assets/icons/airplane.svg';
+import { ReactComponent as CarIcon } from '../assets/icons/car.svg';
+import { ReactComponent as FoodIcon } from '../assets/icons/food.svg';
+import { ReactComponent as HotelIcon } from '../assets/icons/hotel.svg';
+import { ReactComponent as TrainIcon } from '../assets/icons/train.svg';
+
 export const populateFormFromRsvp = (user, currentRsvp) => {
   let rsvpForm = {
     userId: user.id,
@@ -35,4 +41,16 @@ export const getPageColorFromPath = (pathName) => {
     default:
       return 'white';
   }
-}
+};
+
+export const travelIconMap = {
+  airplane: <AirplaneIcon/>,
+  car: <CarIcon/>,
+  food: <FoodIcon/>,
+  hotel: <HotelIcon/>,
+  train: <TrainIcon/>,
+};
+
+export const mapTypeToTravelIcon = (type) => {
+  return travelIconMap[type];
+};

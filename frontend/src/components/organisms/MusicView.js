@@ -9,7 +9,7 @@ const MusicView = () => {
 
   return (
     <ContentWrapper path={location.pathname}>
-      <Title>This is the Music page</Title>
+      <Title>Music</Title>
     </ContentWrapper>
   );
 };

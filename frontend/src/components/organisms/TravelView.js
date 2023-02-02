@@ -2,16 +2,72 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ContentWrapper, Title } from '../../styles/ViewStyles';
+import { TravelItem } from '../atoms';
+import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
 const TravelView = () => {
   const location = useLocation();
 
+  const travelItems = [
+    {
+      type: "airplane",
+      title: "Flying In",
+      content: <GeneralText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus bibendum sapien, at vestibulum eros. Nam in augue dapibus, lacinia nunc quis, aliquam neque.</GeneralText>
+    },
+    {
+      type: "train",
+      title: "Taking a train from Manhattan",
+      content: <GeneralText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus bibendum sapien, at vestibulum eros. Nam in augue dapibus, lacinia nunc quis, aliquam neque.</GeneralText>
+    },
+    {
+      type: "car",
+      title: "Driving from NYC",
+      content: <GeneralText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus bibendum sapien, at vestibulum eros. Nam in augue dapibus, lacinia nunc quis, aliquam neque.</GeneralText>
+    },
+    {
+      type: "hotel",
+      title: "Lodging",
+      content: <GeneralText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus bibendum sapien, at vestibulum eros. Nam in augue dapibus, lacinia nunc quis, aliquam neque.</GeneralText>
+    },
+    {
+      type: "food",
+      title: "Our favorite restaurants",
+      content: <GeneralText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus bibendum sapien, at vestibulum eros. Nam in augue dapibus, lacinia nunc quis, aliquam neque.</GeneralText>
+    },
+  ]
+
   return (
     <ContentWrapper path={location.pathname}>
-      <Title>This is the Travel page</Title>
+      <Title>Travel</Title>
+      <TravelWrapper>
+        {travelItems.map((item, i) => (
+          <>
+            <TravelItem
+              key={`${item.type}-${i}`}
+              type={item.type}
+              title={item.title}
+              content={item.content}
+            />
+            {i !== travelItems.length - 1 ? <GreyLine /> : null}
+          </>
+        ))}
+      </TravelWrapper>
     </ContentWrapper>
   );
 };
+
+const TravelWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+`;
+
+const GreyLine = styled.div`
+  width: 80%;
+  height: 0px;
+  border-top: 1px solid #656D78;
+  margin-bottom: 16px;
+`;
 
 export default TravelView;
