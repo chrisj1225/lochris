@@ -28,6 +28,7 @@ const NavBar = () => {
         <NavLink to="/schedule" locationpath={path}>Schedule</NavLink>
         <NavLink to="/registry" locationpath={path}>Registry</NavLink>
         <NavLink to="/music" locationpath={path}>Music</NavLink>
+        {user.superuser && <NavLink to="/admin" locationpath={path}>Admin</NavLink>}
       </Navigation>
     </NavWrapper>
   )

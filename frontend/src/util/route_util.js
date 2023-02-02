@@ -15,7 +15,7 @@ const Auth = ({ component: Component, path, exact }) => {
       )
     )} />
   );
-}
+};
 
 const Protected = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useSessions();
@@ -32,7 +32,25 @@ const Protected = ({ component: Component, ...rest }) => {
       }
     />
   );
-}
+};
+
+const Super = ({ component: Component, ...rest }) => {
+  const { isAuthenticated, user } = useSessions();
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        (isAuthenticated && user.superuser) ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+  );
+};
 
 export const AuthRoute = withRouter(Auth);
 export const ProtectedRoute = withRouter(Protected);
+export const SuperRoute = withRouter(Super);

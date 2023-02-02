@@ -7,6 +7,7 @@ import TravelView from './TravelView';
 import AboutUsView from './AboutUsView';
 import MomentsView from './MomentsView';
 import MusicView from './MusicView';
+import AdminView from './AdminView';
 
 export {
   Landing,
@@ -18,6 +19,7 @@ export {
   AboutUsView,
   MomentsView,
   MusicView,
+  AdminView,
 };
 
 export default {
@@ -30,4 +32,5 @@ export default {
   AboutUsView,
   MomentsView,
   MusicView,
+  AdminView,
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import '../App.css';
-import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute, SuperRoute } from '../util/route_util';
 import { Footer } from './atoms';
 import { NavBar } from './molecules';
 import {
@@ -15,6 +15,7 @@ import {
   AboutUsView,
   MomentsView,
   MusicView,
+  AdminView
 } from './organisms';
 
 const App = () => (
@@ -30,6 +31,7 @@ const App = () => (
         <ProtectedRoute exact path="/about" component={AboutUsView} />
         <ProtectedRoute exact path="/moments" component={MomentsView} />
         <ProtectedRoute exact path="/music" component={MusicView} />
+        <SuperRoute exact path="/admin" component={AdminView} />
     </Switch>
     <Footer />
   </>
