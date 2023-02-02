@@ -21,7 +21,14 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     lastName: req.user.lastName,
     superuser: req.user.superuser,
   });
-})
+});
+
+router.get('/', 
+  passport.authenticate('jwt', {session: false}),
+  async (req, res) => {
+  const allUsers = await User.find().sort({ lastName: -1 });
+  res.json(allUsers);
+});
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
