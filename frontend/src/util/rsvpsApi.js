@@ -16,6 +16,10 @@ export const createRsvp = (data) => {
   return axios.post('/api/rsvps/', data);
 }
 
+export const editRsvp = (rsvpId, data) => {
+  return axios.put(`/api/rsvps/${rsvpId}`, data);
+}
+
 // class rsvpApi {
 
 //   static createRsvp(data) {

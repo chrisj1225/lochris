@@ -14,6 +14,7 @@ const Landing = () => {
     rsvpFetched,
     currentRsvp,
     createRsvp,
+    updateRsvp,
   } = useRsvps(user.id);
   const location = useLocation();
 
@@ -34,6 +35,11 @@ const Landing = () => {
     e.preventDefault();
     createRsvp(rsvpForm);
   };
+
+  const handleUpdateRsvp = e => {
+    e.preventDefault();
+    updateRsvp(currentRsvp._id, rsvpForm);
+  }
 
   const rsvpFormBody = () => <RsvpFormWrapper>
     <GeneralText>Will you be able to join us on XX/XX/2023?</GeneralText>
@@ -100,7 +106,7 @@ const Landing = () => {
       <RsvpModal>
         <GeneralText>Welcome Back {user.firstName} {user.lastName}!</GeneralText>
         {rsvpFormBody()}
-        <ConfirmButton onClick={handleCreateRsvp}>{mapModaltoButton[activeModal]}</ConfirmButton>
+        <ConfirmButton onClick={handleUpdateRsvp}>{mapModaltoButton[activeModal]}</ConfirmButton>
       </RsvpModal>
     ),
     viewRsvp: (

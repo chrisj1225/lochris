@@ -46,7 +46,18 @@ export const createNewRsvp = (newRsvp, callback) => dispatch => (
   rsvpsApi.createRsvp(newRsvp)
     .then(res => {
       dispatch(receiveRsvp(res.data));
+      // Add logic to send email confirmations
+      if (callback) {
+        callback();
+      }
+    })
+);
 
+export const editRsvp = (rsvpId, rsvp, callback) => dispatch => (
+  rsvpsApi.editRsvp(rsvpId, rsvp)
+    .then(res => {
+      dispatch(receiveRsvp(res.data));
+      // Add logic to send email confirmations
       if (callback) {
         callback();
       }

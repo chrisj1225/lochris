@@ -5,6 +5,7 @@ import {
   fetchAllRsvps,
   fetchUserRsvp,
   createNewRsvp,
+  editRsvp,
 } from '../actions/rsvp_actions';
 
 const useRsvps = (userId) => {
@@ -28,6 +29,10 @@ const useRsvps = (userId) => {
     dispatch(createNewRsvp(data, callback));
   }
 
+  const updateRsvp = (data, callback) => {
+    dispatch(editRsvp(data, callback));
+  }
+
   React.useEffect(() => {
     getUserRsvp(userId, () => setRsvpFetched(true));
   }, []);
@@ -39,6 +44,7 @@ const useRsvps = (userId) => {
     getAllRsvps,
     getUserRsvp,
     createRsvp,
+    updateRsvp,
   }
 }
 

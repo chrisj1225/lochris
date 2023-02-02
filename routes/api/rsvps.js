@@ -52,4 +52,28 @@ router.post('/',
   }
 );
 
+// edit an rsvp
+router.put('/:rsvpId',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    const { errors, isValid } = validateRsvp(req.body, req.user?.plusOne);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const rsvp = await Rsvp.findById(req.params.rsvpId);
+    if (!rsvp) {
+      errors.rsvp = "Rsvp not found";
+      return res.status(400).json(errors);
+    } else {
+      rsvp.attending = req.body.attending;
+      if (rsvp.p1Attending) rsvp.p1Attending = req.body.p1Attending;
+      rsvp.save()
+        .then(rsvp => res.json(rsvp))
+        .catch(err => res.json(err));
+    }
+  }
+);
+
 export default router;
