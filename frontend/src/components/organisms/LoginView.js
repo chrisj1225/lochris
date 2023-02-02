@@ -63,18 +63,18 @@ const LoginView = () => {
   );
 };
 
-const LoginHeader = styled.h1`
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 600;
-`;
-
 const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: calc(100vh - 120px);
+`;
+
+const LoginHeader = styled.h1`
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
 `;
 
 const FormWrapper = styled.div`
