@@ -14,7 +14,7 @@ const AdminView = () => {
     signupGuest,
   } = useSessions();
   const { errors } = useSessionErrors();
-  const { allUsers } = useUsers();
+  const { allUsers, getAllUsers } = useUsers();
 
   const defaultRegisterForm = {
     email: '',
@@ -49,6 +49,7 @@ const AdminView = () => {
 
     signupGuest(user, () => {
       setState(defaultRegisterForm);
+      getAllUsers();
     });
   };
 
@@ -111,6 +112,7 @@ const AdminView = () => {
           </GuestItem>
         ))}
       </GuestList>
+      <GeneralText>{`Guest Count: ${allUsers.length}`}</GeneralText>
     </ContentWrapper>
   );
 };
@@ -124,6 +126,7 @@ const SectionHeader = styled.h1`
 const GuestList = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const GuestHeading = styled(GeneralText)`
@@ -134,6 +137,10 @@ const GuestItem = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 100%;
+
+  &:hover {
+    background-color: #FEF5ED;
+  }
 `;
 
 export default AdminView;
