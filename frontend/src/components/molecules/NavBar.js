@@ -1,17 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useSessions } from '../../hooks';
+import { getPageColorFromPath } from '../../util/misc';
 
 const NavBar = () => {
-
-  const { user, isAuthenticated, isLoggedIn, logoutUser } = useSessions();
+  const { user, isAuthenticated, logoutUser } = useSessions();
+  const location = useLocation();
+  const path = location.pathname;
 
   if (!isAuthenticated) return null;
 
   return (
-    <NavWrapper>
+    <NavWrapper path={path}>
       <NavHeader>Lois & Chris</NavHeader>
       <NavSubHeader>XX.XX.2023 | New York</NavSubHeader>
       <TopMenu>
@@ -19,13 +21,13 @@ const NavBar = () => {
         <LogoutBtn onClick={() => logoutUser()}>Logout</LogoutBtn>
       </TopMenu>
       <Navigation>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/schedule">Schedule</NavLink>
-        <NavLink to="/registry">Registry</NavLink>
-        <NavLink to="/travel">Travel</NavLink>
-        <NavLink to="/about">About Us</NavLink>
-        <NavLink to="/moments">Moments</NavLink>
-        <NavLink to="/music">Music</NavLink>
+        <NavLink to="/" locationpath={path}>Home</NavLink>
+        <NavLink to="/schedule" locationpath={path}>Schedule</NavLink>
+        <NavLink to="/registry" locationpath={path}>Registry</NavLink>
+        <NavLink to="/travel" locationpath={path}>Travel</NavLink>
+        <NavLink to="/about" locationpath={path}>About Us</NavLink>
+        <NavLink to="/moments" locationpath={path}>Moments</NavLink>
+        <NavLink to="/music" locationpath={path}>Music</NavLink>
       </Navigation>
     </NavWrapper>
   )
@@ -36,6 +38,7 @@ const NavWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  background-color: ${(props) => getPageColorFromPath(props.path)}
 `;
 
 const NavHeader = styled.h1`
@@ -54,7 +57,6 @@ const Navigation = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 36px 48px 24px 48px;
-  background: white;
   width: 60%;
   height: 48px;
 `;
@@ -62,7 +64,8 @@ const Navigation = styled.div`
 const NavLink = styled(Link)`
   font-size: 14px;
   color: black;
-  text-decoration: none;
+  text-decoration: ${(props) => props.to === props.locationpath ? 'underline' : 'none'};
+  font-weight: ${(props) => props.to === props.locationpath ? '600' : '400'};
 `;
 
 const TopMenu = styled.div`

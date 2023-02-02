@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 
+import { getPageColorFromPath } from '../util/misc';
+
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  margin-bottom: auto;
+  height: 100%;
+  background-color: ${(props) => getPageColorFromPath(props.path)};
 `;
 
 export const Title = styled.h1`

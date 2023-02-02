@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import { Modal, RadioButton } from '../atoms';
 
@@ -14,6 +15,7 @@ const Landing = () => {
     currentRsvp,
     createRsvp,
   } = useRsvps(user.id);
+  const location = useLocation();
 
   const [activeModal, setActiveModal] = React.useState(null);
 
@@ -142,7 +144,7 @@ const Landing = () => {
 
   console.log({ user, rsvpFetched, currentRsvp, rsvpForm });
   return (
-    <ContentWrapper>
+    <ContentWrapper path={location.pathname}>
       {activeModal && (
         <Modal
           content={modalObj[activeModal]}

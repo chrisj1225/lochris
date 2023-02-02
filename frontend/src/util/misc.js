@@ -15,3 +15,24 @@ export const mapModaltoButton = {
   'editRsvp': 'Update RSVP',
   'viewRsvp': 'Edit RSVP',
 };
+
+export const getPageColorFromPath = (pathName) => {
+  switch (pathName) {
+    case '/':
+      return 'white';
+    case '/schedule':
+      return '#d4afb9';
+    case '/registry':
+      return '#d1cfe2';
+    case '/travel':
+      return '#9cadce';
+    case '/about':
+      return '#7ec4cf';
+    case '/moments':
+      return '#daeaf6';
+    case '/music':
+      return '#c3ebd8';
+    default:
+      return 'white';
+  }
+}
