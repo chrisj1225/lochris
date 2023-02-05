@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { password } from '../../config/keys';
-import { useRsvps, useSessions, useSessionErrors, useUsers } from '../../hooks';
+import { useSessions, useSessionErrors, useUsers } from '../../hooks';
 import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 import { FormWrapper, InputWrapper, TextInput, ErrorMsg, SubmitButton } from '../../styles/FormStyles';
 import { getUserRsvpStatus, statusColorMap, getConfirmedGuestCount } from '../../util/misc';
@@ -52,7 +52,6 @@ const AdminView = () => {
     signupGuest(user, () => {
       setState(defaultRegisterForm);
       getAllUsers();
-      // getAllRsvps();
     });
   };
 
