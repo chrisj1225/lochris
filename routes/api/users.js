@@ -39,7 +39,7 @@ router.get('/',
   const finalUsers = allUsers.map(user => {
     const currRsvp = rsvpsMap[user._id];
 
-    let newUserObj = { ...user._doc };
+    let newUserObj = { ...user._doc, id: user._id };
     if (currRsvp?.attending) {
       newUserObj.attending = currRsvp.attending;
       newUserObj.p1Attending = currRsvp.p1Attending;

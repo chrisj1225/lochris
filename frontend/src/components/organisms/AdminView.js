@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { DataGrid } from '@mui/x-data-grid';
 import styled from 'styled-components';
 
 import { password } from '../../config/keys';
@@ -56,8 +57,58 @@ const AdminView = () => {
   };
 
   // add functionalities:
-  // Search & Filter guests
   // Select guests & send email template via EmailJS
+
+  const columns = [
+    {
+      field: 'id',
+      header: 'ID',
+      width: 20,
+      editable: false,
+    },
+    {
+      field: 'firstName',
+      header: 'First Name',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'lastName',
+      header: 'last Name',
+      width: 120,
+      editable: false,
+    },
+    {
+      field: 'attending',
+      header: 'Attending?',
+      width: 80,
+      editable: false,
+    },
+    {
+      field: 'plusOne',
+      header: 'PlusOne',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'p1Attending',
+      header: 'P1 Attending?',
+      width: 100,
+      editable: false,
+    },
+    {
+      field: 'status',
+      header: 'Status',
+      width: 100,
+      editable: false,
+    },
+    {
+      field: 'email',
+      header: 'Email',
+      width: 200,
+      editable: false,
+    },
+  ];
 
   return (
     <ContentWrapper path={location.pathname}>
@@ -97,45 +148,14 @@ const AdminView = () => {
       <GeneralText>(Edit existing guests on MongoDB)</GeneralText>
       <SectionHeader>~Guest List~</SectionHeader>
       <GuestList>
-        <GuestItem key="heading">
-          <GuestHeading>First Name</GuestHeading>
-          <GuestHeading>Last Name</GuestHeading>
-          <GuestHeading>Attending?</GuestHeading>
-          <GuestHeading>Plus One</GuestHeading>
-          <GuestHeading>P1 Attending?</GuestHeading>
-          <GuestHeading>Status</GuestHeading>
-          <GuestHeading>Email</GuestHeading>
-        </GuestItem>
-        {allUsers.map((user, userIdx) => {
-          const currRsvpStatus = getUserRsvpStatus(user);
-          const statusColor = statusColorMap[currRsvpStatus];
-
-          return (
-            <GuestLineItem key={`${user.lastName}-${userIdx}`}>
-              <GeneralText>{user.firstName}</GeneralText>
-              <GeneralText>{user.lastName}</GeneralText>
-              <GeneralText>
-                {user?.attending === 'y'
-                  ? 'yes'
-                  : user?.attending === 'n'
-                    ? 'no'
-                    : '-'
-                }
-              </GeneralText>
-              <GeneralText>{user.plusOne || '-'}</GeneralText>
-              <GeneralText>
-                {user?.p1Attending === 'y'
-                  ? 'yes'
-                  : user?.p1Attending === 'n'
-                    ? 'no'
-                    : '-'
-                }
-              </GeneralText>
-              <StatusCircle color={statusColor}/>
-              <GeneralText>{user.email}</GeneralText>
-            </GuestLineItem>
-          );
-        })}
+        <DataGrid 
+          rows={allUsers}
+          columns={columns}
+          pageSize={40}
+          autoHeight
+          rowsPerPageOptions={[40]}
+          checkboxSelection
+          />
       </GuestList>
       <GeneralText>{`Guest Count: ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
     </ContentWrapper>
@@ -149,28 +169,8 @@ const SectionHeader = styled.h1`
 `;
 
 const GuestList = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // overflow-x: auto;
-`;
-
-const GuestItem = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-width: 100%;
-padding: 0 8px;
-align-items: center;
-`;
-
-const GuestHeading = styled(GeneralText)`
-  font-weight: 600;
-`;
-
-const GuestLineItem = styled(GuestItem)`
-  &:hover {
-    background-color: #bdbdbd;
-  }
+  // height: 500px;
+  width: 100%;
 `;
 
 const StatusCircle = styled.div`
