@@ -40,9 +40,12 @@ router.get('/',
     const currRsvp = rsvpsMap[user._id];
 
     let newUserObj = { ...user._doc };
-    if (currRsvp?.attending && currRsvp?.p1Attending) {
+    if (currRsvp?.attending) {
       newUserObj.attending = currRsvp.attending;
       newUserObj.p1Attending = currRsvp.p1Attending;
+      newUserObj.status = currRsvp.attending === 'y' ? 'attending' : 'declined';
+    } else {
+      newUserObj.status = 'pending';
     }
     return (newUserObj);
   });
