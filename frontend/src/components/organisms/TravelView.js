@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { TravelItem } from '../atoms';
-import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
+import { device, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
 const TravelView = () => {
   const location = useLocation();
@@ -59,6 +59,14 @@ const TravelWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 600px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
+  
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export default TravelView;

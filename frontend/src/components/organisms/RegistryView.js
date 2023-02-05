@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
+import { device, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
 const RegistryView = () => {
   const location = useLocation();
@@ -22,6 +22,14 @@ const RegistryView = () => {
 
 const RegistryWrapper = styled.div`
   width: 500px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
+  
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export default RegistryView;

@@ -2,6 +2,17 @@ import styled from 'styled-components';
 
 import { getPageColorFromPath } from '../util/misc';
 
+const sizes = {
+  mobile: '320px',
+  tablet: '480px',
+  desktop: '950px',
+};
+
+export const device = {
+  mobile: `(min-width: ${sizes.mobile}) and (max-width: ${sizes.tablet})`,
+  tablet: `(min-width: ${sizes.tablet}) and (max-width: ${sizes.desktop})`,
+};
+
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;

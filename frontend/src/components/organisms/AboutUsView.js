@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
+import { device, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
 const AboutUsView = () => {
   const location = useLocation();
@@ -36,6 +36,14 @@ const AboutUsView = () => {
 
 const AboutUsWrapper = styled.div`
   width: 500px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
+  
+  @media ${device.tablet} {
+    max-width: 100%;
+  }
 `;
 
 export default AboutUsView;
