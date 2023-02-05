@@ -6,7 +6,7 @@ import { Modal, RadioButton } from '../atoms';
 
 import { useRsvps, useSessions } from '../../hooks/'
 import { mapModaltoButton, populateFormFromRsvp } from '../../util/misc';
-import { device, ActionButton, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
+import { device, ActionButton, ContentWrapper, GeneralText, GeneralTextLarge, Title, VerticalBlackLine, ImagePlaceholder } from '../../styles/ViewStyles';
 
 const Landing = () => {
   const { user } = useSessions();
@@ -158,7 +158,6 @@ const Landing = () => {
     }
   };
 
-  console.log({ user, rsvpFetched, currentRsvp, rsvpForm });
   return (
     <ContentWrapper path={location.pathname}>
       {activeModal && (
@@ -167,34 +166,24 @@ const Landing = () => {
           closeModal={() => setActiveModal(null)}
         />
       )}
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
+      <ImagePlaceholder/>
+      <InfoSection>
+        <DateSection>
+          <Title>XXXXXXXX</Title>
+          <Title>XX, 2023</Title>
+        </DateSection>
+        <VerticalBlackLine />
+        <DateSection>
+          <Title>New York, NY</Title>
+        </DateSection>
+      </InfoSection>
       {rsvpBtn()}
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
-      <Title>This is the landing page</Title>
+      <Title>Lois & Chris' Wedding</Title>
+      <GeneralTextLarge>XX.XX.2023</GeneralTextLarge>
+      <GeneralTextLarge>5:00PM - 11:00PM</GeneralTextLarge>
+      <GeneralText>Venue Name</GeneralText>
+      <GeneralText>999 South St, New York, NY, 10030</GeneralText>
+      <GeneralText>Please RSVP by XXXXXXXX XXth, 2023!</GeneralText>
     </ContentWrapper>
   );
 };
@@ -226,6 +215,7 @@ const RsvpButton = styled(ActionButton)`
   padding: 14px 14px;
   background-color: black;
   color: white;
+  margin-bottom: 60px;
 
   &:hover {
     background-color: #212529;
@@ -235,6 +225,25 @@ const RsvpButton = styled(ActionButton)`
 const ConfirmButton = styled(ActionButton)`
   padding: 6px 10px;
   margin-top: auto;
+`;
+
+const InfoSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px 0px 24px 0px;
+
+  @media ${device.mobile} {
+    flex-direction: column;
+  }
+`;
+
+const DateSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
 `;
 
 export default Landing;
