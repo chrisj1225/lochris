@@ -79,7 +79,8 @@ const AdminView = () => {
           emailJSKeys.publicKey
         )
         .then((res) => {
-          console.log({ res, status: 'Success!', templateParams });
+          console.log({ status: res.status, text: res.text, msg: 'Success!', templateParams });
+
         })
         .catch((err) => console.log({ err, status: 'Failed' }));
       } else {
@@ -90,7 +91,7 @@ const AdminView = () => {
           emailJSKeys.publicKey
         )
         .then((res) => {
-          console.log({ res, status: 'Success!', templateParams });
+          console.log({ status: res.status, text: res.text, msg: 'Success!', templateParams });
         })
         .catch((err) => console.log({ err, status: 'Failed' }));
       }
