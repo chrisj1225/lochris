@@ -203,6 +203,7 @@ const AdminView = () => {
       </GuestList>
       <GeneralText>{`Attending Guest Count (incl. Plus Ones): ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
       <GeneralText>{`Selected Guest Count: ${selectedUserIds.length}`}</GeneralText>
+      <SectionHeader>Actions</SectionHeader>
       <button onClick={() => handleSendTestEmail()}>Send Test Email</button>
     </ContentWrapper>
   );
