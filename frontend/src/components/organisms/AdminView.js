@@ -29,11 +29,12 @@ const AdminView = () => {
     errors: {},
   };
 
-  const [state, setState] = React.useState(defaultRegisterForm);
+  const [registerFormState, setRegisterFormState] = React.useState(defaultRegisterForm);
+  const [selectedUserIds, setSelectedUserIds] = React.useState([]);
 
   const updateField = field => {
-    return e => setState({
-      ...state,
+    return e => setRegisterFormState({
+      ...registerFormState,
       [field]: e.currentTarget.value,
     })
   };
@@ -42,16 +43,16 @@ const AdminView = () => {
     e.preventDefault();
 
     let user = {
-      email: state.email,
-      firstName: state.firstName,
-      lastName: state.lastName,
-      plusOne: state.plusOne,
-      password: state.password,
-      superuser: state.superuser,
+      email: registerFormState.email,
+      firstName: registerFormState.firstName,
+      lastName: registerFormState.lastName,
+      plusOne: registerFormState.plusOne,
+      password: registerFormState.password,
+      superuser: registerFormState.superuser,
     };
 
     signupGuest(user, () => {
-      setState(defaultRegisterForm);
+      setRegisterFormState(defaultRegisterForm);
       getAllUsers();
     });
   };
@@ -118,24 +119,24 @@ const AdminView = () => {
         <FormWrapper>
           <InputWrapper>
             <TextInput type="text"
-              value={state.email}
+              value={registerFormState.email}
               onChange={updateField('email')}
               placeholder="Email"
               />
             <ErrorMsg>{errors['email']}</ErrorMsg>
           </InputWrapper>
           <TextInput type="text"
-            value={state.firstName}
+            value={registerFormState.firstName}
             onChange={updateField('firstName')}
             placeholder="First Name"
             />
           <TextInput type="text"
-            value={state.lastName}
+            value={registerFormState.lastName}
             onChange={updateField('lastName')}
             placeholder="Last Name"
             />
           <TextInput type="text"
-            value={state.plusOne}
+            value={registerFormState.plusOne}
             onChange={updateField('plusOne')}
             placeholder="Plus One Name"
             />
