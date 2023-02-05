@@ -11,7 +11,8 @@ const userState = (state = initialState, action) => {
     case RECEIVE_ALL_USERS:
       return {
         ...state,
-        allUsers: action.users,
+        allUsers: action.users.allUsers,
+        userIdMap: action.users.userIdMap,
       }
     default:
       return state;

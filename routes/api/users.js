@@ -30,13 +30,19 @@ router.get('/',
   const allUsers = await User.find().sort({ lastName: 1 });
   const allRsvps = await Rsvp.find();
   
+  // create user map by id to easily find each selected user 
+  const usersMap = {};
+  allUsers.forEach(user => {
+    usersMap[user._id] = user;
+  });
+  
   // combine each user with its rsvp and then return all
   const rsvpsMap = {};
   allRsvps.forEach((rsvp) => {
     rsvpsMap[rsvp.userId] = rsvp;
   });
 
-  const finalUsers = allUsers.map(user => {
+  const finalAllUsers = allUsers.map(user => {
     const currRsvp = rsvpsMap[user._id];
 
     let newUserObj = { ...user._doc, id: user._id };
@@ -50,7 +56,10 @@ router.get('/',
     return (newUserObj);
   });
 
-  res.json(finalUsers);
+  res.json({
+    allUsers: finalAllUsers,
+    userIdMap: usersMap,
+  });
 });
 
 router.post('/register', (req, res) => {
