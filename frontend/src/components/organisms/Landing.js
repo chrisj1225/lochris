@@ -6,7 +6,7 @@ import { Modal, RadioButton } from '../atoms';
 
 import { useRsvps, useSessions } from '../../hooks/'
 import { mapModaltoButton, populateFormFromRsvp } from '../../util/misc';
-import { ActionButton, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
+import { device, ActionButton, ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 
 const Landing = () => {
   const { user } = useSessions();
@@ -206,6 +206,14 @@ const RsvpModal = styled.div`
   width: 500px;
   height: 300px;
   padding: 24px;
+
+  @media ${device.mobile} {
+    width: 300px;
+  }
+  
+  @media ${device.tablet} {
+    width: 450px;
+  }
 `;
 
 const RsvpFormWrapper = styled.div`

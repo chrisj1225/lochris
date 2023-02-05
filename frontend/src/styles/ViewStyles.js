@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { getPageColorFromPath } from '../util/misc';
 
-const sizes = {
+export const sizes = {
   mobile: '320px',
   tablet: '480px',
   desktop: '950px',
