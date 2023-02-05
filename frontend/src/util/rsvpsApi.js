@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const getAllRsvps = () => {
-  return axios.get('/api/rsvps/');
-}
+// export const getAllRsvps = () => {
+//   return axios.get('/api/rsvps/');
+// }
 
 export const getUserRsvp = (userId) => {
   return axios.get(`/api/rsvps/user/${userId}`);

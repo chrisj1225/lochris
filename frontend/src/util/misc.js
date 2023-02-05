@@ -55,9 +55,9 @@ export const mapTypeToTravelIcon = (type) => {
   return travelIconMap[type];
 };
 
-export const getUserRsvpStatus = (rsvp) => {
-  if (rsvp?.attending) {
-    return rsvp.attending === 'y' ? 'attending' : 'declined';
+export const getUserRsvpStatus = (userRsvp) => {
+  if (userRsvp?.attending) {
+    return userRsvp.attending === 'y' ? 'attending' : 'declined';
   } else {
     return 'pending';
   }

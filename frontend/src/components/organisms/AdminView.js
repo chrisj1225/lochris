@@ -17,7 +17,6 @@ const AdminView = () => {
   } = useSessions();
   const { errors } = useSessionErrors();
   const { allUsers, getAllUsers } = useUsers();
-  const { allRsvps, getAllRsvps } = useRsvps(user.id);
 
   const defaultRegisterForm = {
     email: '',
@@ -30,10 +29,6 @@ const AdminView = () => {
   };
 
   const [state, setState] = React.useState(defaultRegisterForm);
-
-  React.useEffect(() => {
-    getAllRsvps();
-  }, []);
 
   const updateField = field => {
     return e => setState({
@@ -57,7 +52,7 @@ const AdminView = () => {
     signupGuest(user, () => {
       setState(defaultRegisterForm);
       getAllUsers();
-      getAllRsvps();
+      // getAllRsvps();
     });
   };
 
@@ -113,8 +108,7 @@ const AdminView = () => {
           <GuestHeading>Email</GuestHeading>
         </GuestItem>
         {allUsers.map((user, userIdx) => {
-          const currGuestRsvp = allRsvps[user._id];
-          const currRsvpStatus = getUserRsvpStatus(currGuestRsvp);
+          const currRsvpStatus = getUserRsvpStatus(user);
           const statusColor = statusColorMap[currRsvpStatus];
 
           return (
@@ -122,18 +116,18 @@ const AdminView = () => {
               <GeneralText>{user.firstName}</GeneralText>
               <GeneralText>{user.lastName}</GeneralText>
               <GeneralText>
-                {currGuestRsvp?.attending === 'y'
+                {user?.attending === 'y'
                   ? 'yes'
-                  : currGuestRsvp?.attending === 'n'
+                  : user?.attending === 'n'
                     ? 'no'
                     : '-'
                 }
               </GeneralText>
               <GeneralText>{user.plusOne || '-'}</GeneralText>
               <GeneralText>
-                {currGuestRsvp?.p1Attending === 'y'
+                {user?.p1Attending === 'y'
                   ? 'yes'
-                  : currGuestRsvp?.p1Attending === 'n'
+                  : user?.p1Attending === 'n'
                     ? 'no'
                     : '-'
                 }
@@ -144,7 +138,7 @@ const AdminView = () => {
           );
         })}
       </GuestList>
-      <GeneralText>{`Guest Count: ${getConfirmedGuestCount(allRsvps)}`}</GeneralText>
+      <GeneralText>{`Guest Count: ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
     </ContentWrapper>
   );
 };

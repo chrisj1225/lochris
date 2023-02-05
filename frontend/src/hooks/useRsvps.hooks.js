@@ -17,9 +17,9 @@ const useRsvps = (userId) => {
     allRsvps,
   } = useSelector((state) => state.rsvps);
 
-  const getAllRsvps = (callback) => {
-    dispatch(fetchAllRsvps(callback));
-  };
+  // const getAllRsvps = (callback) => {
+  //   dispatch(fetchAllRsvps(callback));
+  // };
   
   const getUserRsvp = (userId, callback) => {
     dispatch(fetchUserRsvp(userId, callback));
@@ -41,7 +41,7 @@ const useRsvps = (userId) => {
     rsvpFetched,
     currentRsvp,
     allRsvps,
-    getAllRsvps,
+    // getAllRsvps,
     getUserRsvp,
     createRsvp,
     updateRsvp,

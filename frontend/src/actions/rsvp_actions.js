@@ -13,16 +13,16 @@ export const receiveAllRsvps = (rsvps) => ({
   rsvps,
 });
 
-export const fetchAllRsvps = (callback) => dispatch => (
-  rsvpsApi.getAllRsvps()
-    .then(res => {
-      dispatch(receiveAllRsvps(res.data));
+// export const fetchAllRsvps = (callback) => dispatch => (
+//   rsvpsApi.getAllRsvps()
+//     .then(res => {
+//       dispatch(receiveAllRsvps(res.data));
 
-      if (callback) {
-        callback();
-      }
-    })
-);
+//       if (callback) {
+//         callback();
+//       }
+//     })
+// );
 
 export const fetchUserRsvp = (userId, callback) => dispatch => (
   rsvpsApi.getUserRsvp(userId)

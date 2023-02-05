@@ -5,6 +5,7 @@ import passport from 'passport';
 
 import { keys } from '../../config/keys.js';
 import User from '../../models/User.js';
+import Rsvp from '../../models/Rsvp.js';
 import { validateRegisterInput } from '../../validation/register.js';
 import { validateLoginInput } from '../../validation/login.js';
 
@@ -27,7 +28,26 @@ router.get('/',
   passport.authenticate('jwt', {session: false}),
   async (req, res) => {
   const allUsers = await User.find().sort({ lastName: 1 });
-  res.json(allUsers);
+  const allRsvps = await Rsvp.find();
+  
+  // combine each user with its rsvp and then return all
+  const rsvpsMap = {};
+  allRsvps.forEach((rsvp) => {
+    rsvpsMap[rsvp.userId] = rsvp;
+  });
+
+  const finalUsers = allUsers.map(user => {
+    const currRsvp = rsvpsMap[user._id];
+
+    let newUserObj = { ...user._doc };
+    if (currRsvp?.attending && currRsvp?.p1Attending) {
+      newUserObj.attending = currRsvp.attending;
+      newUserObj.p1Attending = currRsvp.p1Attending;
+    }
+    return (newUserObj);
+  });
+
+  res.json(finalUsers);
 });
 
 router.post('/register', (req, res) => {
