@@ -155,9 +155,14 @@ const AdminView = () => {
           autoHeight
           rowsPerPageOptions={[40]}
           checkboxSelection
+          selectionModel={selectedUserIds}
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectedUserIds(newSelectionModel);
+          }}
           />
       </GuestList>
-      <GeneralText>{`Guest Count: ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
+      <GeneralText>{`Attending Guest Count (incl. Plus Ones): ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
+      <GeneralText>{`Selected Guest Count: ${selectedUserIds.length}`}</GeneralText>
     </ContentWrapper>
   );
 };
