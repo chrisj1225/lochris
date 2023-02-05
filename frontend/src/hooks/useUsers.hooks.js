@@ -9,7 +9,8 @@ const useUsers = (userId) => {
   const dispatch = useDispatch();
 
   const {
-    allUsers
+    allUsers,
+    userIdMap,
   } = useSelector((state) => state.users);
 
   const getAllUsers = (callback) => {
@@ -22,6 +23,7 @@ const useUsers = (userId) => {
 
   return {
     allUsers,
+    userIdMap,
     getAllUsers,
   }
 }

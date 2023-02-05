@@ -1,9 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
 import { DataGrid } from '@mui/x-data-grid';
 import styled from 'styled-components';
 
-import { password } from '../../config/keys';
+import { password, emailJSKeys } from '../../config/keys';
 import { useSessions, useSessionErrors, useUsers } from '../../hooks';
 import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 import { FormWrapper, InputWrapper, TextInput, ErrorMsg, SubmitButton } from '../../styles/FormStyles';
@@ -17,7 +18,7 @@ const AdminView = () => {
     signupGuest,
   } = useSessions();
   const { errors } = useSessionErrors();
-  const { allUsers, getAllUsers } = useUsers();
+  const { allUsers, userIdMap, getAllUsers, } = useUsers();
 
   const defaultRegisterForm = {
     email: '',
@@ -57,8 +58,45 @@ const AdminView = () => {
     });
   };
 
-  // add functionalities:
-  // Select guests & send email template via EmailJS
+  const handleSendTestEmail = () => {
+    const selectedUsers = selectedUserIds.map(id =>  userIdMap[id]);
+    selectedUsers.forEach((user) => {
+      const templateParams = {
+        email: user.email,
+        to_firstName: user.firstName,
+        to_lastName: user.lastName,
+        reply_to: 'chrisj1225@gmail.com',
+        message: 'You are cordially invited!',
+      }
+
+      if (user.plusOne) {
+        templateParams.to_plusOne_name = user.plusOne;
+
+        emailjs.send(
+          emailJSKeys.serviceId,
+          emailJSKeys.testP1TemplateId,
+          templateParams,
+          emailJSKeys.publicKey
+        )
+        .then((res) => {
+          console.log({ res, status: 'Success!', templateParams });
+        })
+        .catch((err) => console.log({ err, status: 'Failed' }));
+      } else {
+        emailjs.send(
+          emailJSKeys.serviceId,
+          emailJSKeys.testTemplateId,
+          templateParams,
+          emailJSKeys.publicKey
+        )
+        .then((res) => {
+          console.log({ res, status: 'Success!', templateParams });
+        })
+        .catch((err) => console.log({ err, status: 'Failed' }));
+      }
+    })
+
+  };
 
   const columns = [
     {
@@ -70,7 +108,7 @@ const AdminView = () => {
     {
       field: 'firstName',
       headerName: 'First Name',
-      width: 150,
+      width: 140,
       editable: false,
     },
     {
@@ -82,7 +120,7 @@ const AdminView = () => {
     {
       field: 'attending',
       headerName: 'Attending?',
-      width: 80,
+      width: 90,
       editable: false,
     },
     {
@@ -94,7 +132,7 @@ const AdminView = () => {
     {
       field: 'p1Attending',
       headerName: 'P1 Attending?',
-      width: 100,
+      width: 110,
       editable: false,
     },
     {
@@ -164,6 +202,7 @@ const AdminView = () => {
       </GuestList>
       <GeneralText>{`Attending Guest Count (incl. Plus Ones): ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
       <GeneralText>{`Selected Guest Count: ${selectedUserIds.length}`}</GeneralText>
+      <button onClick={() => handleSendTestEmail()}>Send Test Email</button>
     </ContentWrapper>
   );
 };
