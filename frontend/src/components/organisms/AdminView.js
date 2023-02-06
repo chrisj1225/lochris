@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { ExportJsonCsv } from 'react-export-json-csv';
+import csvDownload from 'json-to-csv-export';
 import emailjs from '@emailjs/browser';
 import { DataGrid } from '@mui/x-data-grid';
 import styled from 'styled-components';
@@ -100,6 +100,29 @@ const AdminView = () => {
 
   };
 
+  const handleExportGuestList = () => {
+    const selectedUsers = selectedUserIds
+      .map(id => userIdMap[id])
+      .map(user => ({
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        attending: user.attending || '-',
+        plusOne: user.plusOne || '-',
+        p1Attending: user.p1Attending || '-',
+        status: user.status,
+        email: user.email,
+      }));
+  
+    const data = {
+      data: selectedUsers,
+      filename: 'guest-list',
+      headers: ['ID', 'First Name', 'Last Name', 'Attending?', 'Plus One', 'P1 Attending?', 'Status', 'Email'],
+    };
+
+    csvDownload(data);
+  }
+
   const columns = [
     {
       field: 'id',
@@ -151,42 +174,7 @@ const AdminView = () => {
     },
   ];
 
-  const csvHeaders = [
-    {
-      key: 'id',
-      name: 'ID',
-    },
-    {
-      key: 'firstName',
-      name: 'First Name',
-    },
-    {
-      key: 'lastName',
-      name: 'Last Name',
-    },
-    {
-      key: 'attending',
-      name: 'Attending?',
-    },
-    {
-      key: 'plusOne',
-      name: 'PlusOne',
-    },
-    {
-      key: 'p1Attending',
-      name: 'P1 Attending?',
-    },
-    {
-      key: 'status',
-      name: 'Status',
-    },
-    {
-      key: 'email',
-      name: 'Email',
-    },
-  ];
-
-  console.log(allUsers);
+  console.log({allUsers, userIdMap});
   return (
     <ContentWrapper path={location.pathname}>
       <Title>Admin</Title>
@@ -243,11 +231,7 @@ const AdminView = () => {
       <SectionHeader>Actions</SectionHeader>
       <ActionsWrapper>
         <button onClick={() => handleSendTestEmail()}>Send Test Email</button>
-        <ExportJsonCsv
-          headers={csvHeaders}
-          items={allUsers}
-          fileTitle="guest-list"
-        >Export Guest List</ExportJsonCsv>
+        <button onClick={() => handleExportGuestList()}>Export Guest List</button>
       </ActionsWrapper>
     </ContentWrapper>
   );

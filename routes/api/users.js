@@ -30,12 +30,6 @@ router.get('/',
   const allUsers = await User.find().sort({ lastName: 1 });
   const allRsvps = await Rsvp.find();
   
-  // create user map by id to easily find each selected user 
-  const usersMap = {};
-  allUsers.forEach(user => {
-    usersMap[user._id] = user;
-  });
-  
   // combine each user with its rsvp and then return all
   const rsvpsMap = {};
   allRsvps.forEach((rsvp) => {
@@ -54,6 +48,12 @@ router.get('/',
       newUserObj.status = 'pending';
     }
     return (newUserObj);
+  });
+
+  // create user map by id to easily find each selected user 
+  const usersMap = {};
+  finalAllUsers.forEach(user => {
+    usersMap[user._id] = user;
   });
 
   res.json({
