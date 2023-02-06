@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { ExportJsonCsv } from 'react-export-json-csv';
 import emailjs from '@emailjs/browser';
 import { DataGrid } from '@mui/x-data-grid';
 import styled from 'styled-components';
@@ -150,6 +151,42 @@ const AdminView = () => {
     },
   ];
 
+  const csvHeaders = [
+    {
+      key: 'id',
+      name: 'ID',
+    },
+    {
+      key: 'firstName',
+      name: 'First Name',
+    },
+    {
+      key: 'lastName',
+      name: 'Last Name',
+    },
+    {
+      key: 'attending',
+      name: 'Attending?',
+    },
+    {
+      key: 'plusOne',
+      name: 'PlusOne',
+    },
+    {
+      key: 'p1Attending',
+      name: 'P1 Attending?',
+    },
+    {
+      key: 'status',
+      name: 'Status',
+    },
+    {
+      key: 'email',
+      name: 'Email',
+    },
+  ];
+
+  console.log(allUsers);
   return (
     <ContentWrapper path={location.pathname}>
       <Title>Admin</Title>
@@ -204,7 +241,14 @@ const AdminView = () => {
       <GeneralText>{`Attending Guest Count (incl. Plus Ones): ${getConfirmedGuestCount(allUsers)}`}</GeneralText>
       <GeneralText>{`Selected Guest Count: ${selectedUserIds.length}`}</GeneralText>
       <SectionHeader>Actions</SectionHeader>
-      <button onClick={() => handleSendTestEmail()}>Send Test Email</button>
+      <ActionsWrapper>
+        <button onClick={() => handleSendTestEmail()}>Send Test Email</button>
+        <ExportJsonCsv
+          headers={csvHeaders}
+          items={allUsers}
+          fileTitle="guest-list"
+        >Export Guest List</ExportJsonCsv>
+      </ActionsWrapper>
     </ContentWrapper>
   );
 };
@@ -218,6 +262,12 @@ const SectionHeader = styled.h1`
 const GuestList = styled.div`
   // height: 500px;
   width: 100%;
+`;
+
+const ActionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const StatusCircle = styled.div`
