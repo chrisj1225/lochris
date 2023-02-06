@@ -4,6 +4,7 @@ import useRsvps from './useRsvps.hooks';
 import useSessionErrors from './useSessionErrors.hooks';
 import useSessions from './useSessions.hooks';
 import useUsers from './useUsers.hooks';
+import useEmailJs from './useEmailJs.hooks';
 
 export {
   useEscape,
@@ -12,6 +13,7 @@ export {
   useSessionErrors,
   useSessions,
   useUsers,
+  useEmailJs,
 };
 
 export default {
@@ -21,4 +23,5 @@ export default {
   useSessionErrors,
   useSessionErrors,
   useUsers,
+  useEmailJs,
 };

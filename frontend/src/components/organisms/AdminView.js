@@ -1,12 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import csvDownload from 'json-to-csv-export';
-import emailjs from '@emailjs/browser';
 import { DataGrid } from '@mui/x-data-grid';
 import styled from 'styled-components';
 
-import { password, emailJSKeys } from '../../config/keys';
-import { useSessions, useSessionErrors, useUsers } from '../../hooks';
+import { password } from '../../config/keys';
+import { useSessions, useSessionErrors, useUsers, useEmailJs } from '../../hooks';
 import { ContentWrapper, GeneralText, Title } from '../../styles/ViewStyles';
 import { FormWrapper, InputWrapper, TextInput, ErrorMsg, SubmitButton } from '../../styles/FormStyles';
 import { getUserRsvpStatus, statusColorMap, getConfirmedGuestCount } from '../../util/misc';
@@ -34,6 +33,8 @@ const AdminView = () => {
   const [registerFormState, setRegisterFormState] = React.useState(defaultRegisterForm);
   const [selectedUserIds, setSelectedUserIds] = React.useState([]);
 
+  const { handleSendTestEmail } = useEmailJs(selectedUserIds, userIdMap);
+
   const updateField = field => {
     return e => setRegisterFormState({
       ...registerFormState,
@@ -57,47 +58,6 @@ const AdminView = () => {
       setRegisterFormState(defaultRegisterForm);
       getAllUsers();
     });
-  };
-
-  const handleSendTestEmail = () => {
-    const selectedUsers = selectedUserIds.map(id =>  userIdMap[id]);
-    selectedUsers.forEach((user) => {
-      const templateParams = {
-        email: user.email,
-        to_firstName: user.firstName,
-        to_lastName: user.lastName,
-        reply_to: 'chrisj1225@gmail.com',
-        message: 'You are cordially invited!',
-      }
-
-      if (user.plusOne) {
-        templateParams.to_plusOne_name = user.plusOne;
-
-        emailjs.send(
-          emailJSKeys.serviceId,
-          emailJSKeys.testP1TemplateId,
-          templateParams,
-          emailJSKeys.publicKey
-        )
-        .then((res) => {
-          console.log({ status: res.status, text: res.text, msg: 'Success!', templateParams });
-
-        })
-        .catch((err) => console.log({ err, status: 'Failed' }));
-      } else {
-        emailjs.send(
-          emailJSKeys.serviceId,
-          emailJSKeys.testTemplateId,
-          templateParams,
-          emailJSKeys.publicKey
-        )
-        .then((res) => {
-          console.log({ status: res.status, text: res.text, msg: 'Success!', templateParams });
-        })
-        .catch((err) => console.log({ err, status: 'Failed' }));
-      }
-    })
-
   };
 
   const handleExportGuestList = () => {
